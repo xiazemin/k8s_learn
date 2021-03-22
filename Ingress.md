@@ -245,3 +245,12 @@ NAME                                        READY   STATUS             RESTARTS 
 ingress-nginx-admission-create-mklnk        0/1     Completed          0          8m48s
 ingress-nginx-admission-patch-qthqj         0/1     Completed          0          8m47s
 ingress-nginx-controller-7fc74cf778-tq5gw   0/1     ImagePullBackOff   0          8m48s
+
+
+ Warning  Failed       7m55s (x4 over 10m)     kubelet            Failed to pull image "k8s.gcr.io/ingress-nginx/controller:v0.44.0@sha256:3dd0fac48073beaca2d67a78c746c7593f9c575168a17139a9955a82c63c4b9a": rpc error: code = Unknown desc = Error response from daemon: Get https://k8s.gcr.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+  Normal   BackOff      5m39s (x12 over 9m59s)  kubelet            Back-off pulling image "k8s.gcr.io/ingress-nginx/controller:v0.44.0@sha256:3dd0fac48073beaca2d67a78c746c7593f9c575168a17139a9955a82c63c4b9a"
+  Warning  Failed       41s (x33 over 9m59s)    kubelet            Error: ImagePullBackOff
+xiazemin@bogon MyBlogSrc % docker pull k8s.gcr.io/ingress-nginx/controller:v0.44.0@sha256:3dd0fac48073beaca2d67a78c746c7593f9c575168a17139a9955a82c63c4b9a
+Error response from daemon: Get https://k8s.gcr.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+
+
