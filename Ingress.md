@@ -146,3 +146,102 @@ service/apple-service created
 % kubectl describe pod apple-app
  Error: failed to start container "apple-app": Error response from daemon: OCI runtime create failed: container_linux.go:367: starting container process caused: exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown
 
+
+ % kubectl get services
+NAME             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+apple-service    ClusterIP   10.100.104.71    <none>        5678/TCP   14m
+banana-service   ClusterIP   10.109.109.102   <none>        5678/TCP   13m
+kubernetes       ClusterIP   10.96.0.1        <none>        443/TCP    26h
+
+
+ % kubectl describe Ingress example-ingress
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+Name:             example-ingress
+Namespace:        default
+Address:
+Default backend:  default-http-backend:80 (<error: endpoints "default-http-backend" not found>)
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *
+              /apple    apple-service:5678 (10.1.0.11:5678)
+              /banana   banana-service:5678 (10.1.0.12:5678)
+Annotations:  ingress.kubernetes.io/rewrite-target: /
+Events:
+  Type    Reason  Age    From                      Message
+  ----    ------  ----   ----                      -------
+  Normal  CREATE  5m52s  nginx-ingress-controller  Ingress default/example-ingress
+
+https://stackoverflow.com/questions/66557860/default-http-backend80-error-endpoints-default-http-backend-not-found
+
+https://github.com/nginxinc/kubernetes-ingress/issues/966
+
+https://stackoverflow.com/questions/63558461/endpoints-default-http-backend-not-found-in-ingress-resource
+
+Create default-http-backend service in kube-system namespace and error will be gone.
+
+
+ % kubectl get pod -n ingress-nginx
+NAME                                       READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-v9bn7       0/1     Completed   0          34m
+ingress-nginx-admission-patch-55hln        0/1     Completed   0          34m
+ingress-nginx-controller-98f46f89d-vlrkd   1/1     Running     0          35m
+
+% kubectl logs ingress-nginx-admission-create-v9bn7 -n  ingress-nginx
+{"err":"secrets \"ingress-nginx-admission\" not found","level":"info","msg":"no secret found","source":"k8s/k8s.go:101","time":"2021-03-22T15:02:38Z"}
+{"level":"info","msg":"creating new secret","source":"cmd/create.go:23","time":"2021-03-22T15:02:38Z"}
+
+https://kubernetes.github.io/ingress-nginx/troubleshooting/
+
+https://www.jianshu.com/p/131bf15235b1
+
+
+https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md
+
+ % curl -o ingress-nginx.yaml https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/cloud/deploy.yaml
+
+
+https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ingress-guide-nginx-example.html
+
+ https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/cloud-generic.yaml
+
+  % kubectl get pods -n ingress-nginx \
+  -l app.kubernetes.io/name=ingress-nginx --watch
+
+kubectl apply -f ingress-nginx.yaml
+
+TopologySpreadConstraints:[]core.TopologySpreadConstraint(nil)}}: field is immutable
+
+% kubectl delete -f ingress-nginx.yaml
+
+% kubectl apply -f ingress-nginx.v2.yaml
+namespace/ingress-nginx created
+serviceaccount/ingress-nginx created
+configmap/ingress-nginx-controller created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
+role.rbac.authorization.k8s.io/ingress-nginx created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx created
+service/ingress-nginx-controller-admission created
+service/ingress-nginx-controller created
+deployment.apps/ingress-nginx-controller created
+validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
+serviceaccount/ingress-nginx-admission created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+role.rbac.authorization.k8s.io/ingress-nginx-admission created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+job.batch/ingress-nginx-admission-create created
+job.batch/ingress-nginx-admission-patch created
+
+
+https://github.com/AliyunContainerService/k8s-for-docker-desktop
+
+ % docker pull k8s.gcr.io/ingress-nginx/controller:v0.44.0
+Error response from daemon: Get https://k8s.gcr.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+
+ %  kubectl get pods -n ingress-nginx
+NAME                                        READY   STATUS             RESTARTS   AGE
+ingress-nginx-admission-create-mklnk        0/1     Completed          0          8m48s
+ingress-nginx-admission-patch-qthqj         0/1     Completed          0          8m47s
+ingress-nginx-controller-7fc74cf778-tq5gw   0/1     ImagePullBackOff   0          8m48s
