@@ -255,3 +255,180 @@ Error response from daemon: Get https://k8s.gcr.io/v2/: net/http: request cancel
 
 
 https://www.jianshu.com/p/52889bc8571d
+
+
+ % docker pull registry.cn-hangzhou.aliyuncs.com/acs/aliyun-ingress-controller:v0.44.0.1-5e842447b-aliyun
+
+  % kubectl get pods -n ingress-nginx
+NAME                                       READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-8gfvf       0/1     Completed   0          26s
+ingress-nginx-admission-patch-z6xlt        0/1     Completed   0          25s
+ingress-nginx-controller-84599cfff-vt6zp   1/1     Running     0          26s
+
+ % docker pull docker.io/jettech/kube-webhook-certgen:v1.5.1
+v1.5.1: Pulling from jettech/kube-webhook-certgen
+Digest: sha256:950833e19ade18cd389d647efb88992a7cc077abedef343fa59e012d376d79b7
+Status: Image is up to date for jettech/kube-webhook-certgen:v1.5.1
+docker.io/jettech/kube-webhook-certgen:v1.5.1
+
+https://segmentfault.com/a/1190000023375829
+
+
+% kubectl apply -f sample/apple.yaml
+pod/apple-app created
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+service/apple-service configured
+% kubectl apply -f sample/banana.yaml
+pod/banana-app created
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+service/banana-service configured
+
+% kubectl apply -f sample/ingress.yaml
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.extensions/example-ingress configured
+
+
+% kubectl delete -f sample/ingress.yaml
+
+% kubectl create -f sample/apple.yaml
+pod/apple-app created
+service/apple-service created
+
+% kubectl create -f sample/banana.yaml
+pod/banana-app created
+service/banana-service created
+
+% kubectl create -f sample/ingress.yaml
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.extensions/example-ingress created
+
+
+
+% kubectl describe pod banana-app
+Name:         banana-app
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Tue, 23 Mar 2021 13:06:19 +0800
+Labels:       app=banana
+Annotations:  <none>
+Status:       Running
+IP:           10.1.0.79
+IPs:
+  IP:  10.1.0.79
+Containers:
+  banana-app:
+    Container ID:  docker://db395978745f8ab0198a28ce178cd2686609dc806be0cfb17b2f84f9d780a4e5
+    Image:         hashicorp/http-echo
+    Image ID:      docker-pullable://hashicorp/http-echo@sha256:ba27d460cd1f22a1a4331bdf74f4fccbc025552357e8a3249c40ae216275de96
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      -text=banana
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    2
+      Started:      Tue, 23 Mar 2021 13:07:53 +0800
+      Finished:     Tue, 23 Mar 2021 13:07:53 +0800
+    Ready:          False
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-kwnzg (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  default-token-kwnzg:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-kwnzg
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                 From               Message
+  ----     ------     ----                ----               -------
+  Normal   Scheduled  113s                default-scheduler  Successfully assigned default/banana-app to docker-desktop
+  Normal   Pulled     85s                 kubelet            Successfully pulled image "hashicorp/http-echo" in 26.216452678s
+  Normal   Pulled     53s                 kubelet            Successfully pulled image "hashicorp/http-echo" in 30.848312097s
+  Normal   Pulling    38s (x3 over 111s)  kubelet            Pulling image "hashicorp/http-echo"
+  Normal   Created    18s (x3 over 85s)   kubelet            Created container banana-app
+  Normal   Pulled     18s                 kubelet            Successfully pulled image "hashicorp/http-echo" in 19.373288176s
+  Normal   Started    17s (x3 over 84s)   kubelet            Started container banana-app
+  Warning  BackOff    3s (x5 over 51s)    kubelet            Back-off restarting failed container
+
+  https://cloud.tencent.com/document/product/457/8187
+  https://managedkube.com/kubernetes/pod/failure/crashloopbackoff/k8sbot/troubleshooting/2019/02/12/pod-failure-crashloopbackoff.html
+
+
+  https://stackoverflow.com/questions/61365202/nginx-ingress-service-ingress-nginx-controller-admission-not-found
+
+% kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+validatingwebhookconfiguration.admissionregistration.k8s.io "ingress-nginx-admission" deleted
+
+% kubectl apply -f ingress-nginx.v4.yaml
+
+
+
+https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-manifests/#uninstall-the-ingress-controller
+
+
+% kubectl apply -f tomcat-deploy.yaml
+namespace/testing created
+deployment.apps/tomcat-deploy created
+service/tomcat-svc created
+
+% kubectl apply -f tomcat-ingress.yaml
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.extensions/tomcat created
+
+% kubectl get pods -n testing
+NAME                             READY   STATUS              RESTARTS   AGE
+tomcat-deploy-789fbddff4-2zk8w   0/1     ContainerCreating   0          23s
+tomcat-deploy-789fbddff4-lztkt   0/1     ContainerCreating   0          23s
+
+% % docker pull tomcat:8.0.52-jre8-alpine
+8.0.50-jre8-alpine: Pulling from library/tomcat
+b78042c299ad: Already exists 
+
+% kubectl get pod -n testing
+NAME                             READY   STATUS    RESTARTS   AGE
+tomcat-deploy-7fbb64c968-bl686   1/1     Running   0          23s
+tomcat-deploy-7fbb64c968-hrk4k   1/1     Running   0          26s
+
+% kubectl get ingress -n testing       
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+NAME     CLASS    HOSTS                  ADDRESS     PORTS   AGE
+tomcat   <none>   tomcat.kubernetes.io   localhost   80      31m
+
+
+% kubectl get pod,deploy,svc,ingress -n testing
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+NAME                                 READY   STATUS    RESTARTS   AGE
+pod/tomcat-deploy-7fbb64c968-bl686   1/1     Running   0          3m42s
+pod/tomcat-deploy-7fbb64c968-hrk4k   1/1     Running   0          3m45s
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/tomcat-deploy   2/2     2            2           34m
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/tomcat-svc   ClusterIP   10.107.249.124   <none>        80/TCP    34m
+
+NAME                        CLASS    HOSTS                  ADDRESS     PORTS   AGE
+ingress.extensions/tomcat   <none>   tomcat.kubernetes.io   localhost   80      33m
+
+
+% kubectl apply -f controller-service.yaml
+service/ingress-nginx-controller configured
+
+https://github.com/MicrosoftDocs/azure-docs/issues/62037
+
+kubectl delete -A ValidatingWebhookConfiguration nginx-ingress-ingress-nginx-admission and then deleting the admission pod created with kubectl delete pod nginx-ingress-ingress-nginx-admission-create-xxxxx solved the problem.
+
