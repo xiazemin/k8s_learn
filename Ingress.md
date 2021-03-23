@@ -254,3 +254,4 @@ xiazemin@bogon MyBlogSrc % docker pull k8s.gcr.io/ingress-nginx/controller:v0.44
 Error response from daemon: Get https://k8s.gcr.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
 
 
+https://www.jianshu.com/p/52889bc8571d
