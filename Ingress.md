@@ -486,3 +486,21 @@ Other Ingress API updates:
 
 % kubectl apply -f sample/ingress.v1.yaml
 ingress.networking.k8s.io/example-ingress created
+
+
+重启
+
+ % curl http://127.0.0.1
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+% curl http://127.0.0.1/apple
+apple
+% curl http://127.0.0.1/banana
+banana
+
+问题解决
