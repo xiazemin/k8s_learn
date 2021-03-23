@@ -432,3 +432,57 @@ https://github.com/MicrosoftDocs/azure-docs/issues/62037
 
 kubectl delete -A ValidatingWebhookConfiguration nginx-ingress-ingress-nginx-admission and then deleting the admission pod created with kubectl delete pod nginx-ingress-ingress-nginx-admission-create-xxxxx solved the problem.
 
+https://stackoverflow.com/questions/59763024/kubernetes-nginx-ingress-unexpected-error-storing-fake-ssl-cert-could-not-creat
+
+https://github.com/kubernetes/ingress-nginx/blob/controller-0.32.0/deploy/static/provider/kind/deploy.yaml
+
+https://zhuanlan.zhihu.com/p/106206871
+
+https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ingress-guide-nginx-example.html
+
+https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
+
+https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class
+
+
+https://kubernetes.github.io/ingress-nginx/deploy/#verify-installation
+% POD_NAMESPACE=ingress-nginx
+POD_NAME=$(kubectl get pods -n $POD_NAMESPACE -l app.kubernetes.io/name=ingress-nginx --field-selector=status.phase=Running -o jsonpath='{.items[0].metadata.name}')
+
+kubectl exec -it $POD_NAME -n $POD_NAMESPACE -- /nginx-ingress-controller --version
+-------------------------------------------------------------------------------
+NGINX Ingress controller
+  Release:       v0.44.0.1-5e842447b-aliyun
+  Build:         git-5e842447b
+  Repository:    ingress-nginx
+  nginx version: nginx/1.19.6
+
+-------------------------------------------------------------------------------
+
+https://github.com/zegl/kube-score/pull/302
+
+
+
+ % kubectl apply -f sample/ingress.yaml
+error: error validating "sample/ingress.yaml": error validating data: [ValidationError(Ingress.spec.rules[0].http.paths[0].backend): unknown field "serviceName" in io.k8s.api.networking.v1.IngressBackend, ValidationError(Ingress.spec.rules[0].http.paths[0].backend): unknown field "servicePort" in io.k8s.api.networking.v1.IngressBackend, ValidationError(Ingress.spec.rules[0].http.paths[1].backend): unknown field "serviceName" in io.k8s.api.networking.v1.IngressBackend, ValidationError(Ingress.spec.rules[0].http.paths[1].backend): unknown field "servicePort" in io.k8s.api.networking.v1.IngressBackend]; if you choose to ignore these errors, turn validation off with --validate=false
+
+
+
+https://stackoverflow.com/questions/64125048/get-error-unknown-field-servicename-in-io-k8s-api-networking-v1-ingressbacken
+
+
+`Ingress` and `IngressClass` resources have graduated to `networking.k8s.io/v1`. Ingress and IngressClass types in the `extensions/v1beta1` and `networking.k8s.io/v1beta1` API versions are deprecated and will no longer be served in 1.22+. Persisted objects can be accessed via the `networking.k8s.io/v1` API. Notable changes in v1 Ingress objects (v1beta1 field names are unchanged):
+* `spec.backend` -> `spec.defaultBackend`
+* `serviceName` -> `service.name`
+* `servicePort` -> `service.port.name` (for string values)
+* `servicePort` -> `service.port.number` (for numeric values)
+* `pathType` no longer has a default value in v1; "Exact", "Prefix", or "ImplementationSpecific" must be specified
+Other Ingress API updates:
+* backends can now be resource or service backends
+* `path` is no longer required to be a valid regular expression
+
+
+* spec.rules[0].http.paths[1].pathType: Required value: pathType must be specified
+
+% kubectl apply -f sample/ingress.v1.yaml
+ingress.networking.k8s.io/example-ingress created
