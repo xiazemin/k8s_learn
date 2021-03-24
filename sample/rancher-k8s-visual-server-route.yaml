@@ -1,0 +1,15 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServerRoute
+metadata:
+  name: rancher-k8s 
+  namespace: cattle-system
+spec:
+  host: localhost
+  upstreams:
+  - name: rancher-k8s 
+    service: rancher-k8s
+    port: 80
+  subroutes:
+  - path: /rancher
+    action:
+      pass: rancher-k8s
