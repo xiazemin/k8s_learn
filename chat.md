@@ -46,3 +46,13 @@ https://www.jianshu.com/p/41dc6aada2ef
 https://blog.csdn.net/weixin_41806245/article/details/93745532
 
 https://stackoverflow.com/questions/64286761/package-models-is-not-in-goroot-when-build-docker
+
+https://stackoverflow.com/questions/65095510/docker-build-from-parent-directory-is-giving-error-package-is-not-in-goroot
+
+
+ => ERROR [build-env 4/4] RUN go build -v -o /go/src/app/server main.go                                                                                  0.5s
+------
+ > [build-env 4/4] RUN go build -v -o /go/src/app/server main.go:
+#10 0.476 $GOPATH/go.mod exists but should not
+
+ % rm go.mod
