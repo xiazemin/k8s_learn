@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: apple-app
-      image: hashicorp/http-echo
+      image: apple:v1
       args:
         - "-text=apple"
 

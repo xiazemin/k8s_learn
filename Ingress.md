@@ -504,3 +504,6 @@ apple
 banana
 
 问题解决
+
+
+https://github.com/jet/kube-webhook-certgen

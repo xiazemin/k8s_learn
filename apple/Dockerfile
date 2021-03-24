@@ -1,13 +1,14 @@
-FROM golang:alpine AS build-env
+FROM arm64v8/golang AS build-env
 ENV GO111MODULE=on
 ENV CGO_ENABLED 0
-ADD .  .
-WORKDIR /go/src/app
+ADD  ./main.go /go/src/app/
+ADD  ./go.mod /go/src/app/
+WORKDIR /go/src/app/
 RUN go build -v -o /go/src/app/server main.go
  
-FROM centos:centos7.9.2009
+FROM scratch
 COPY --from=build-env /go/src/app/server /app/server
 WORKDIR /app
-EXPOSE 10248
-CMD [":10248"]
+EXPOSE 5678
+CMD [":5678"]
 ENTRYPOINT ["./server"]
