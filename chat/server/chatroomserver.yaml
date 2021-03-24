@@ -1,0 +1,21 @@
+#chatroomserver.yaml
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: chatroomserver
+spec:
+  selector:
+    matchLabels:
+      app: chatroomserver
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: chatroomserver
+    spec:
+      containers:
+      - name: chatroomserver
+        image: 997595461/chatroomserver
+        ports:
+        - containerPort: 10248
+          protocol: TCP

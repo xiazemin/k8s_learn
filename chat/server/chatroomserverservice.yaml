@@ -1,0 +1,16 @@
+#chatroomserverservice.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatroomserver
+  labels:
+    app: chatroomserver
+spec:
+  type: NodePort
+  ports:
+  - port: 10248
+    targetPort: 10248
+    nodePort: 30009
+    protocol: TCP
+  selector:
+    app: chatroomserver
