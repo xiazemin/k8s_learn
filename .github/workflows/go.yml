@@ -1,12 +1,11 @@
 
 name: Gitee repos mirror periodic job
-
 on:
-# 如果需要PR触发把push前的#去掉
-# push:
+  workflow_dispatch:
   schedule:
-    # 每天北京时间9点跑
-    - cron:  '39 * * * *'
+    # * is a special character in YAML so you have to quote this string
+    # UTC 20:00 -> CST (China) 4:00, see https://datetime360.com/cn/utc-cst-china-time/
+    - cron: '43 * * * *'
   #push:
    # branches: [ master ]
   #pull_request:
