@@ -4,13 +4,13 @@ name: Gitee repos mirror periodic job
 on:
 # 如果需要PR触发把push前的#去掉
 # push:
-  schedule:
+  #schedule:
     # 每天北京时间9点跑
-    - cron:  '0 1 * * *'
+  #  - cron:  '0 1 * * *'
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  #pull_request:
+  #  branches: [ master ]
 
 jobs:
 
@@ -37,11 +37,11 @@ jobs:
         # 还有黑、白名单，静态名单机制，可以用于更新某些指定库
         # static_list: repo_name
 
-    - name: Build
-      run: go build -v ./...
+    #- name: Build
+     # run: go build -v ./...
 
-    - name: Test
-      run: go test -v ./...
+    #- name: Test
+     # run: go test -v ./...
   
 
         # black_list: 'repo_name,repo_name2'
