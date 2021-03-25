@@ -6,7 +6,7 @@ on:
 # push:
   schedule:
     # 每天北京时间9点跑
-    - cron:  '40 * * * *'
+    - cron:  '26 * * * *'
   push:
     branches: [ master ]
   pull_request:
