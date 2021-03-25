@@ -5,7 +5,7 @@ on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     # UTC 20:00 -> CST (China) 4:00, see https://datetime360.com/cn/utc-cst-china-time/
-    - cron: '33 * * * *'
+    - cron: '48 * * * *'
   push:
     branches: [ master ]
   #pull_request:
@@ -24,6 +24,7 @@ jobs:
         dst: gitee/xzming
         #https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
         # 必选，Gitee公钥对应的私钥，https://gitee.com/profile/sshkeys
+        #注意Environment secrets，Repository secrets区别
         dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
         # 必选，Gitee对应的用于创建仓库的token，https://gitee.com/profile/personal_access_tokens
         dst_token: ${{ secrets.GITEE_TOKEN }}
