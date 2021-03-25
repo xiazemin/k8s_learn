@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Mirror the Github organization repos to Gitee.
+    - name: Mirror the Github organization repos to Gitee .
       uses: Yikun/hub-mirror-action@master
       with:
         go-version: 1.15
