@@ -2,10 +2,10 @@
 name: Gitee repos mirror periodic job
 on:
   workflow_dispatch:
-  #schedule:
+  schedule:
     # * is a special character in YAML so you have to quote this string
     # UTC 20:00 -> CST (China) 4:00, see https://datetime360.com/cn/utc-cst-china-time/
-    #- cron: '43 * * * *'
+    - cron: '33 * * * *'
   push:
     branches: [ master ]
   #pull_request:
@@ -30,7 +30,7 @@ jobs:
         # 必选，Gitee对应的用于创建仓库的token，https://gitee.com/profile/personal_access_tokens
         dst_token:  ${{ secrets.GITEE_TOKEN }}
         # 如果是组织，指定组织即可，默认为用户user
-        black_list: 'k8s_learn,lean_record,php_ext_class'
+        white_list: 'k8s_learn,lean_record,php_ext_class'
         # 如果是组织，指定组织即可，默认为用户user
         force_update: true
         debug: true
