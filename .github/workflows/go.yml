@@ -18,8 +18,6 @@ jobs:
     - name: Mirror the Github organization repos to Gitee .
       uses: Yikun/hub-mirror-action@master
       with:
-        go-version: 1.15
-      
         # 必选，需要同步的Github用户（源）
         src: github/xiazemin
         # 必选，需要同步到的Gitee的用户（目的）
