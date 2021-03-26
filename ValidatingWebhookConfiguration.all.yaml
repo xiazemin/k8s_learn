@@ -1,0 +1,417 @@
+apiVersion: v1
+items:
+- apiVersion: admissionregistration.k8s.io/v1
+  kind: ValidatingWebhookConfiguration
+  metadata:
+    annotations:
+      cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-ca
+      meta.helm.sh/release-name: cert-manager
+      meta.helm.sh/release-namespace: cert-manager
+    creationTimestamp: "2021-03-24T09:51:22Z"
+    generation: 2
+    labels:
+      app: webhook
+      app.kubernetes.io/component: webhook
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: webhook
+      helm.sh/chart: cert-manager-v1.2.0
+    managedFields:
+    - apiVersion: admissionregistration.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:cert-manager.io/inject-ca-from-secret: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:helm.sh/chart: {}
+        f:webhooks:
+          .: {}
+          k:{"name":"webhook.cert-manager.io"}:
+            .: {}
+            f:admissionReviewVersions: {}
+            f:clientConfig:
+              .: {}
+              f:service:
+                .: {}
+                f:name: {}
+                f:namespace: {}
+                f:path: {}
+                f:port: {}
+            f:failurePolicy: {}
+            f:matchPolicy: {}
+            f:name: {}
+            f:namespaceSelector:
+              .: {}
+              f:matchExpressions: {}
+            f:objectSelector: {}
+            f:rules: {}
+            f:sideEffects: {}
+            f:timeoutSeconds: {}
+      manager: Go-http-client
+      operation: Update
+      time: "2021-03-24T09:51:22Z"
+    - apiVersion: admissionregistration.k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:webhooks:
+          k:{"name":"webhook.cert-manager.io"}:
+            f:clientConfig:
+              f:caBundle: {}
+      manager: cainjector
+      operation: Update
+      time: "2021-03-24T09:52:42Z"
+    name: cert-manager-webhook
+    resourceVersion: "166933"
+    selfLink: /apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations/cert-manager-webhook
+    uid: ac90b231-7701-446f-8db8-33f99708e7cb
+  webhooks:
+  - admissionReviewVersions:
+    - v1
+    - v1beta1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJ3akNDQVVlZ0F3SUJBZ0lRUVpqM0NqQ1VyWWVlSUg5TFJTVERkekFLQmdncWhrak9QUVFEQXpBaU1TQXcKSGdZRFZRUURFeGRqWlhKMExXMWhibUZuWlhJdGQyVmlhRzl2YXkxallUQWVGdzB5TVRBek1qUXdPVFV5TkRKYQpGdzB5TWpBek1qUXdPVFV5TkRKYU1DSXhJREFlQmdOVkJBTVRGMk5sY25RdGJXRnVZV2RsY2kxM1pXSm9iMjlyCkxXTmhNSFl3RUFZSEtvWkl6ajBDQVFZRks0RUVBQ0lEWWdBRWJFMXVyZkh0empWSW1JUGxIREQwQitVT2xJMncKclJDRXZISmdWejljbkdaNXdmQmpjRzdYY2U4cjFBQVUvQlNoS0hubVNjZmQzcEMxNEZLdGcwRlZ1RERxdGpPWApydjdNWXRMRjFqOUdza2dtR2ZnTCtEVUF6WTF3YUEyaUd5dGdvMEl3UURBT0JnTlZIUThCQWY4RUJBTUNBcVF3CkR3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVW40dlkwUUJydTFZVFJoNVpnMVJiZVJEMHBSY3cKQ2dZSUtvWkl6ajBFQXdNRGFRQXdaZ0l4QU5yZ1NhZXhlbWhUUlRqaUZEOHdhVFpEZzFaMlE5SWE0cDVvR0F2cAptZUszNmdkRDRRVUxiQk4wNmpzUVA5bDZtd0l4QUtHY05rWm43WXNnY0VCdkhmdUxEdklvdGZuZmVzZEVaVi9SCmlKd2hBTFFMY3EvcVd0K3dVTGFuOUFPRWZ5ZUVGQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: cert-manager-webhook
+        namespace: cert-manager
+        path: /validate
+        port: 443
+    failurePolicy: Fail
+    matchPolicy: Equivalent
+    name: webhook.cert-manager.io
+    namespaceSelector:
+      matchExpressions:
+      - key: cert-manager.io/disable-validation
+        operator: NotIn
+        values:
+        - "true"
+      - key: name
+        operator: NotIn
+        values:
+        - cert-manager
+    objectSelector: {}
+    rules:
+    - apiGroups:
+      - cert-manager.io
+      - acme.cert-manager.io
+      apiVersions:
+      - '*'
+      operations:
+      - CREATE
+      - UPDATE
+      resources:
+      - '*/*'
+      scope: '*'
+    sideEffects: None
+    timeoutSeconds: 10
+- apiVersion: admissionregistration.k8s.io/v1
+  kind: ValidatingWebhookConfiguration
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"admissionregistration.k8s.io/v1","kind":"ValidatingWebhookConfiguration","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"admission-webhook","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"ingress-nginx","app.kubernetes.io/version":"0.44.0","helm.sh/chart":"ingress-nginx-3.23.0"},"name":"ingress-nginx-admission"},"webhooks":[{"admissionReviewVersions":["v1","v1beta1"],"clientConfig":{"service":{"name":"ingress-nginx-controller-admission","namespace":"ingress-nginx","path":"/networking/v1beta1/ingresses"}},"failurePolicy":"Fail","matchPolicy":"Equivalent","name":"validate.nginx.ingress.kubernetes.io","rules":[{"apiGroups":["networking.k8s.io"],"apiVersions":["v1beta1"],"operations":["CREATE","UPDATE"],"resources":["ingresses"]}],"sideEffects":"None"}]}
+    creationTimestamp: "2021-03-24T02:21:12Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/component: admission-webhook
+      app.kubernetes.io/instance: ingress-nginx
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: ingress-nginx
+      app.kubernetes.io/version: 0.44.0
+      helm.sh/chart: ingress-nginx-3.23.0
+    managedFields:
+    - apiVersion: admissionregistration.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/version: {}
+            f:helm.sh/chart: {}
+        f:webhooks:
+          .: {}
+          k:{"name":"validate.nginx.ingress.kubernetes.io"}:
+            .: {}
+            f:admissionReviewVersions: {}
+            f:clientConfig:
+              .: {}
+              f:service:
+                .: {}
+                f:name: {}
+                f:namespace: {}
+                f:path: {}
+                f:port: {}
+            f:failurePolicy: {}
+            f:matchPolicy: {}
+            f:name: {}
+            f:namespaceSelector: {}
+            f:objectSelector: {}
+            f:rules: {}
+            f:sideEffects: {}
+            f:timeoutSeconds: {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: "2021-03-24T02:21:12Z"
+    - apiVersion: admissionregistration.k8s.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:webhooks:
+          k:{"name":"validate.nginx.ingress.kubernetes.io"}:
+            f:clientConfig:
+              f:caBundle: {}
+      manager: kube-webhook-certgen
+      operation: Update
+      time: "2021-03-24T02:21:18Z"
+    name: ingress-nginx-admission
+    resourceVersion: "122620"
+    selfLink: /apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations/ingress-nginx-admission
+    uid: 15fe6839-3f1e-45ac-9b37-637df1b7bdbf
+  webhooks:
+  - admissionReviewVersions:
+    - v1
+    - v1beta1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJkRENDQVJ1Z0F3SUJBZ0lRWCtNbXZiaXdGdzk2VjZWZ2ZhTGE4VEFLQmdncWhrak9QUVFEQWpBUE1RMHcKQ3dZRFZRUUtFd1J1YVd3eE1DQVhEVEl4TURNeU5EQXlNVFl4TmxvWUR6SXhNakV3TWpJNE1ESXhOakUyV2pBUApNUTB3Q3dZRFZRUUtFd1J1YVd3eE1Ga3dFd1lIS29aSXpqMENBUVlJS29aSXpqMERBUWNEUWdBRUg5aldNN1lVCkwwRlJtZEhiVktacFRCVWpxSnNta3lmRTJTdlBWTmwrL3hnMGc0V0pybVNuL0FLS3lyQ2Nia1d2ZzBzZGRZOHoKZHl3WTdnZ1E2QlN1bHFOWE1GVXdEZ1lEVlIwUEFRSC9CQVFEQWdJRU1CTUdBMVVkSlFRTU1Bb0dDQ3NHQVFVRgpCd01CTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRklrMy9zazVuTXJDQmtISzdQMkxrTUtuCjJBQVNNQW9HQ0NxR1NNNDlCQU1DQTBjQU1FUUNJRjdLNmtQdjdjb08xakJOSlZNamFyOSt2U1dVeXJZcVU5VmkKVjhTeGFLNmFBaUJnR21NZ0pzWlcySUNaaXRWQmJxT29oa1hjOGJMeW93aVNnRjdPVjhZVkdnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+      service:
+        name: ingress-nginx-controller-admission
+        namespace: ingress-nginx
+        path: /networking/v1beta1/ingresses
+        port: 443
+    failurePolicy: Fail
+    matchPolicy: Equivalent
+    name: validate.nginx.ingress.kubernetes.io
+    namespaceSelector: {}
+    objectSelector: {}
+    rules:
+    - apiGroups:
+      - networking.k8s.io
+      apiVersions:
+      - v1beta1
+      operations:
+      - CREATE
+      - UPDATE
+      resources:
+      - ingresses
+      scope: '*'
+    sideEffects: None
+    timeoutSeconds: 10
+- apiVersion: admissionregistration.k8s.io/v1
+  kind: ValidatingWebhookConfiguration
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: rancher-webhook
+      meta.helm.sh/release-namespace: cattle-system
+      objectset.rio.cattle.io/applied: H4sIAAAAAAAA/+yWUW/bNhDHv8rAZ6WRLCurDeyhskU7SiJHlEjbKvJAibSlkCJViXaSFv7ug+x0a4us67CiA4a+CXe8u/8dyR/1AdTcUEYNBeMPQNGagzFoqSpK3r4qqDGSv6o0sEDRcmoqrdKq5p2hdQPGaielBSTNuez6aJ3f88J03LxqK/1n8HlJuxKMgc0L6tHC9l5vcr75dePmI5fyfDNy6euhQ4fewB15ubcBBwtQpbQ51vtq5oqBMQDWX/r1g+Lt2XYvwBic7x3rl6tKsd8SXrTc/G3Y8zBO5rMHnpdai7OCflNg19Dik+juqTO87js7LkF8w1uuCt6B8dsPgDYV4W1XaQXGYO8AC4hK9a39ofQrWnbHIXiMea7nDc/cEaVnw/zCOxvRC/es2Dhuzl2H04HX76JWptVS8haMN1R23AK51IVY9KqmXHJzFHF0He4OFnguddL5teMhK67MRKtNte13rOPtvuoncIp6eRzWFxk/NgYs0FBTnjbt/Nl4vqeyYscz0ft1a8B4OHQPFiiov1NM9omuE9tcJ84EYRamlT9FJMQJzsLYhhgdfbaZCCdMcNigIJrG5GaQ2dBNcOhntpzEGPmJHarMhZoOmlsMIUIBfBenLMKKuWjAMgQzhLGBPPDajBQOnYWrfKav1oJ1vEZzoghdBtJe30dXuXCSwmVzTGRAZJ+LDJPaSPKe6LVkHa3DeT5vBHIyZynLkEHxhFbsks6iRbpsIHtoIi7EQ0qQz2wvSFdydfStGshs5yJZyYgE0E0Fijhh36CzqdDg8WLyfXSuSABxXLP7Ylm2VLy+whCGsfhsflEsQjcVkR8T+C6toyZL4TCtOntN0ATN4CqfjDSb2W5G0DsyGA2iIBwUM2efJSNvmYyWRawHfJZd5AS7dBW2qL584oHjE/uRsGUYY8VioiK7cP3Z2vHnWEiczHC7vpePaDby0hULSQBv45otiCjRIgj97L6EExH6KY78gkAXzY/zSm4g8jHe7mMBCbOhi/Dlngt4HddMnXocxZjAIF6yRYJhEIvMpxjO1wIuovfyIp8WV0tIIqrQfAGjLBePZeKUHiNsT4OSRpCtsDCCz2GYzskkxlLH2JRJTcpsjhbxYAQTEg7pNAtwnSniNDKHUcTeNBNklx0hN0/FezK7WTZx6mbZpDqdaYS94DKIIJYoREJOY4Lg6S7YVz112p18Zo1uePsRrG/BBAVv0gBYAN9O+487q4fRrNW75uivqaJbXnNlPrntp0XPxDou27u9seWd3rUnqIFC7jrD2653dIVu+ts5OdnA4c4CG1rJXctvtayKJzAGl1ulWw4s0FWMB5tNz1cwBpFWvZGyuur6cojvK/7wWe2el3sn54Y64O5gfYkpujPlT1T9RNVPVP2/UGWBaXAdfFdmbaXOqWy15HmlWKW2L9PL+nEU7bUYXjeSGv6fi2la3f/2fqrppTlFHyHKfqi65wfnn6h74RmCtJL//hG6O/weAAD//6Y3zCVYDQAA
+      objectset.rio.cattle.io/id: ""
+      objectset.rio.cattle.io/owner-gvk: /v1, Kind=Secret
+      objectset.rio.cattle.io/owner-name: cattle-webhook-ca
+      objectset.rio.cattle.io/owner-namespace: cattle-system
+    creationTimestamp: "2021-03-24T10:02:52Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      objectset.rio.cattle.io/hash: 0eca5ac058fbef7f3b93aebf93a841a452395b5f
+    managedFields:
+    - apiVersion: admissionregistration.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:meta.helm.sh/release-name: {}
+            f:meta.helm.sh/release-namespace: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+        f:webhooks:
+          .: {}
+          k:{"name":"rancher.cattle.io"}:
+            .: {}
+            f:admissionReviewVersions: {}
+            f:clientConfig:
+              .: {}
+              f:service:
+                .: {}
+                f:name: {}
+                f:namespace: {}
+                f:path: {}
+                f:port: {}
+            f:failurePolicy: {}
+            f:matchPolicy: {}
+            f:name: {}
+            f:namespaceSelector: {}
+            f:objectSelector: {}
+            f:sideEffects: {}
+            f:timeoutSeconds: {}
+      manager: Go-http-client
+      operation: Update
+      time: "2021-03-24T10:02:52Z"
+    - apiVersion: admissionregistration.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:objectset.rio.cattle.io/applied: {}
+            f:objectset.rio.cattle.io/id: {}
+            f:objectset.rio.cattle.io/owner-gvk: {}
+            f:objectset.rio.cattle.io/owner-name: {}
+            f:objectset.rio.cattle.io/owner-namespace: {}
+          f:labels:
+            f:objectset.rio.cattle.io/hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"5dd53554-39aa-4b65-9a63-cf13be31ea25"}:
+              .: {}
+              f:apiVersion: {}
+              f:blockOwnerDeletion: {}
+              f:controller: {}
+              f:kind: {}
+              f:name: {}
+              f:uid: {}
+        f:webhooks:
+          k:{"name":"rancher.cattle.io"}:
+            f:clientConfig:
+              f:caBundle: {}
+            f:rules: {}
+          k:{"name":"rancherauth.cattle.io"}:
+            .: {}
+            f:admissionReviewVersions: {}
+            f:clientConfig:
+              .: {}
+              f:caBundle: {}
+              f:service:
+                .: {}
+                f:name: {}
+                f:namespace: {}
+                f:path: {}
+                f:port: {}
+            f:failurePolicy: {}
+            f:matchPolicy: {}
+            f:name: {}
+            f:namespaceSelector: {}
+            f:objectSelector: {}
+            f:rules: {}
+            f:sideEffects: {}
+            f:timeoutSeconds: {}
+      manager: webhook
+      operation: Update
+      time: "2021-03-24T10:04:47Z"
+    name: rancher.cattle.io
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: false
+      controller: false
+      kind: Secret
+      name: cattle-webhook-ca
+      uid: 5dd53554-39aa-4b65-9a63-cf13be31ea25
+    resourceVersion: "170971"
+    selfLink: /apis/admissionregistration.k8s.io/v1/validatingwebhookconfigurations/rancher.cattle.io
+    uid: 9b3557ff-4682-42b4-9e20-1fc6b40ec7c5
+  webhooks:
+  - admissionReviewVersions:
+    - v1
+    - v1beta1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJpRENDQVM2Z0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQTdNUnd3R2dZRFZRUUtFeE5rZVc1aGJXbGoKYkdsemRHVnVaWEl0YjNKbk1Sc3dHUVlEVlFRREV4SmtlVzVoYldsamJHbHpkR1Z1WlhJdFkyRXdIaGNOTWpFdwpNekkwTVRBd05ETXlXaGNOTXpFd016SXlNVEF3TkRNeVdqQTdNUnd3R2dZRFZRUUtFeE5rZVc1aGJXbGpiR2x6CmRHVnVaWEl0YjNKbk1Sc3dHUVlEVlFRREV4SmtlVzVoYldsamJHbHpkR1Z1WlhJdFkyRXdXVEFUQmdjcWhrak8KUFFJQkJnZ3Foa2pPUFFNQkJ3TkNBQVFqTmNpZTF4Tis0YVRCRGFXbC9odG03ZVRqV292NEJ2cG1vZS95WS9WcQo2eGZ6bVU3aXJrRmIyeE1BV0xVdWJQUndQVnN0c3BGY1BHUklUSGUrYjlxRG95TXdJVEFPQmdOVkhROEJBZjhFCkJBTUNBcVF3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekFLQmdncWhrak9QUVFEQWdOSUFEQkZBaUFHYkFONzl6bDcKWFVNanRHOFNZbkxhS1h5dVdvaEhaNFdXUktkeHFJTHVCQUloQUthSmVhZHROQ29FSVJ4aDZEUmZnV1plbFNNdApCR0hsVVMyczVGMWpQT3ZZCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rancher-webhook
+        namespace: cattle-system
+        path: /v1/webhook/validation
+        port: 443
+    failurePolicy: Ignore
+    matchPolicy: Equivalent
+    name: rancher.cattle.io
+    namespaceSelector: {}
+    objectSelector: {}
+    rules:
+    - apiGroups:
+      - management.cattle.io
+      apiVersions:
+      - v3
+      operations:
+      - CREATE
+      - UPDATE
+      resources:
+      - clusters
+      scope: Cluster
+    sideEffects: None
+    timeoutSeconds: 10
+  - admissionReviewVersions:
+    - v1
+    - v1beta1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJpRENDQVM2Z0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQTdNUnd3R2dZRFZRUUtFeE5rZVc1aGJXbGoKYkdsemRHVnVaWEl0YjNKbk1Sc3dHUVlEVlFRREV4SmtlVzVoYldsamJHbHpkR1Z1WlhJdFkyRXdIaGNOTWpFdwpNekkwTVRBd05ETXlXaGNOTXpFd016SXlNVEF3TkRNeVdqQTdNUnd3R2dZRFZRUUtFeE5rZVc1aGJXbGpiR2x6CmRHVnVaWEl0YjNKbk1Sc3dHUVlEVlFRREV4SmtlVzVoYldsamJHbHpkR1Z1WlhJdFkyRXdXVEFUQmdjcWhrak8KUFFJQkJnZ3Foa2pPUFFNQkJ3TkNBQVFqTmNpZTF4Tis0YVRCRGFXbC9odG03ZVRqV292NEJ2cG1vZS95WS9WcQo2eGZ6bVU3aXJrRmIyeE1BV0xVdWJQUndQVnN0c3BGY1BHUklUSGUrYjlxRG95TXdJVEFPQmdOVkhROEJBZjhFCkJBTUNBcVF3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekFLQmdncWhrak9QUVFEQWdOSUFEQkZBaUFHYkFONzl6bDcKWFVNanRHOFNZbkxhS1h5dVdvaEhaNFdXUktkeHFJTHVCQUloQUthSmVhZHROQ29FSVJ4aDZEUmZnV1plbFNNdApCR0hsVVMyczVGMWpQT3ZZCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rancher-webhook
+        namespace: cattle-system
+        path: /v1/webhook/validation
+        port: 443
+    failurePolicy: Fail
+    matchPolicy: Equivalent
+    name: rancherauth.cattle.io
+    namespaceSelector: {}
+    objectSelector: {}
+    rules:
+    - apiGroups:
+      - management.cattle.io
+      apiVersions:
+      - v3
+      operations:
+      - CREATE
+      - UPDATE
+      - DELETE
+      resources:
+      - globalrolebindings
+      scope: Cluster
+    - apiGroups:
+      - management.cattle.io
+      apiVersions:
+      - v3
+      operations:
+      - CREATE
+      - UPDATE
+      resources:
+      - roletemplates
+      scope: Cluster
+    - apiGroups:
+      - management.cattle.io
+      apiVersions:
+      - v3
+      operations:
+      - CREATE
+      - UPDATE
+      resources:
+      - projectroletemplatebindings
+      scope: Namespaced
+    - apiGroups:
+      - management.cattle.io
+      apiVersions:
+      - v3
+      operations:
+      - CREATE
+      - UPDATE
+      resources:
+      - clusterroletemplatebindings
+      scope: Namespaced
+    sideEffects: None
+    timeoutSeconds: 10
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

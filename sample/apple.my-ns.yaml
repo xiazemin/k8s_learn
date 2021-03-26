@@ -1,0 +1,26 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: apple-app
+  namespace: my-ns
+  labels:
+    app: apple
+spec:
+  containers:
+    - name: apple-app
+      image: apple:v1
+      args:
+        - "-text=apple"
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: apple-service
+  namespace: my-ns
+spec:
+  selector:
+    app: apple
+  ports:
+    - port: 5678 # Default port for image
