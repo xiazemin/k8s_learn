@@ -234,10 +234,62 @@ https://blog.csdn.net/oJinXuan1/article/details/85008262
 # See README.md for details.
 additionalTrustedCAs: false
 
+ % helm delete rancher-k8s -n cattle-system
+Error: uninstallation completed with 1 error(s): unable to build kubernetes objects for delete: unable to recognize "": no matches for kind "Issuer" in version "cert-manager.io/v1beta1"
+
+% helm delete rancher-webhook -n  cattle-system
+release "rancher-webhook" uninstalled
 
 
+% helm list  -n cattle-system
+NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
+
+% helm list  -A
+NAME            	NAMESPACE              	REVISION	UPDATED                                	STATUS  	CHART                                                                             	APP VERSION
+fleet           	fleet-system           	1       	2021-03-26 14:25:36.082813507 +0000 UTC	deployed	fleet-0.3.400                                                                     	0.3.4
+fleet-agent     	fleet-system           	1       	2021-03-26 14:26:06.598600674 +0000 UTC	deployed	fleet-agent-v0.0.0+s-2879661f9d0e3cfaea1b12951bb30640413f45ac5ccec4579b5c261733160
+fleet-crd       	fleet-system           	1       	2021-03-26 14:26:03.402779131 +0000 UTC	deployed	fleet-crd-0.3.400                                                                 	0.3.4
+rancher-operator	rancher-operator-system	1       	2021-03-26 14:26:20.13096475 +0000 UTC 	deployed	rancher-operator-0.1.300                                                          	0.1.3
 
 
+% helm delete fleet -n fleet-system
+release "fleet" uninstalled
+
+% helm delete fleet-agent -n fleet-system
+release "fleet-agent" uninstalled
+
+% helm delete fleet-crd -n fleet-system
+
+ % helm delete rancher-operator -n      rancher-operator-system
+release "rancher-operator" uninstalled
+
+ % kubectl get all -n cattle-global-data
+No resources found in cattle-global-data namespace.
+
+https://stackoverflow.com/questions/55036464/how-to-deleteuninstall-helm-chart-on-specific-resource
+
+ % kubectl delete ns cattle-global-data
+namespace "cattle-global-data" deleted
+
+% kubectl delete ns cattle-global-nt
+namespace "cattle-global-nt" deleted
+
+% kubectl delete ns cattle-system
+namespace "cattle-system" deleted
+
+% kubectl get all -n cluster-fleet-local-local-1a3d67d0a899
+No resources found in cluster-fleet-local-local-1a3d67d0a899 namespace.
+
+% kubectl delete ns cluster-fleet-local-local-1a3d67d0a899
+namespace "cluster-fleet-local-local-1a3d67d0a899" deleted
+
+https://blog.51cto.com/13760351/2494356
+
+https://www.jianshu.com/p/5fb3e1a998d6
+https://new.qq.com/omn/20210104/20210104A0BCZZ00.html
+https://blog.51cto.com/13760351/2494356
+
+https://zhuanlan.zhihu.com/p/109032970
 
 
 
