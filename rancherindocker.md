@@ -172,3 +172,4 @@ baa230450dc8
 k8s.gcr.io/pause                                                  3.2                                                           80d28bedfe5d   13 months ago   683kB
 
 https://blog.ilemonrain.com/docker/rancher-with-k3s.html
+http://hutao.tech/k8s-source-code-analysis/prepare/debug-environment.html
