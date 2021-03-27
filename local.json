@@ -1,0 +1,133 @@
+{
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": {
+        "annotations": {
+            "cattle.io/status": "{\"Conditions\":[{\"Type\":\"ResourceQuotaInit\",\"Status\":\"True\",\"Message\":\"\",\"LastUpdateTime\":\"2021-03-26T14:25:46Z\"},{\"Type\":\"InitialRolesPopulated\",\"Status\":\"True\",\"Message\":\"\",\"LastUpdateTime\":\"2021-03-26T14:25:47Z\"}]}",
+            "lifecycle.cattle.io/create.namespace-auth": "true",
+            "management.cattle.io/system-namespace": "true"
+        },
+        "creationTimestamp": "2021-03-26T14:25:19Z",
+        "deletionTimestamp": "2021-03-26T16:58:28Z",
+        "managedFields": [
+            {
+                "apiVersion": "v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:metadata": {
+                        "f:annotations": {
+                            ".": {},
+                            "f:cattle.io/status": {},
+                            "f:lifecycle.cattle.io/create.namespace-auth": {},
+                            "f:management.cattle.io/system-namespace": {}
+                        }
+                    },
+                    "f:status": {
+                        "f:phase": {}
+                    }
+                },
+                "manager": "rancher",
+                "operation": "Update",
+                "time": "2021-03-26T14:25:46Z"
+            },
+            {
+                "apiVersion": "v1",
+                "fieldsType": "FieldsV1",
+                "fieldsV1": {
+                    "f:status": {
+                        "f:conditions": {
+                            ".": {},
+                            "k:{\"type\":\"NamespaceContentRemaining\"}": {
+                                ".": {},
+                                "f:lastTransitionTime": {},
+                                "f:message": {},
+                                "f:reason": {},
+                                "f:status": {},
+                                "f:type": {}
+                            },
+                            "k:{\"type\":\"NamespaceDeletionContentFailure\"}": {
+                                ".": {},
+                                "f:lastTransitionTime": {},
+                                "f:message": {},
+                                "f:reason": {},
+                                "f:status": {},
+                                "f:type": {}
+                            },
+                            "k:{\"type\":\"NamespaceDeletionDiscoveryFailure\"}": {
+                                ".": {},
+                                "f:lastTransitionTime": {},
+                                "f:message": {},
+                                "f:reason": {},
+                                "f:status": {},
+                                "f:type": {}
+                            },
+                            "k:{\"type\":\"NamespaceDeletionGroupVersionParsingFailure\"}": {
+                                ".": {},
+                                "f:lastTransitionTime": {},
+                                "f:message": {},
+                                "f:reason": {},
+                                "f:status": {},
+                                "f:type": {}
+                            },
+                            "k:{\"type\":\"NamespaceFinalizersRemaining\"}": {
+                                ".": {},
+                                "f:lastTransitionTime": {},
+                                "f:message": {},
+                                "f:reason": {},
+                                "f:status": {},
+                                "f:type": {}
+                            }
+                        }
+                    }
+                },
+                "manager": "kube-controller-manager",
+                "operation": "Update",
+                "time": "2021-03-26T16:58:33Z"
+            }
+        ],
+        "name": "local",
+        "resourceVersion": "508801",
+        "selfLink": "/api/v1/namespaces/local",
+        "uid": "4d207f43-cb1e-4025-a6c8-33d86ca45750"
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastTransitionTime": "2021-03-26T16:58:33Z",
+                "message": "All resources successfully discovered",
+                "reason": "ResourcesDiscovered",
+                "status": "False",
+                "type": "NamespaceDeletionDiscoveryFailure"
+            },
+            {
+                "lastTransitionTime": "2021-03-26T16:58:33Z",
+                "message": "All legacy kube types successfully parsed",
+                "reason": "ParsedGroupVersions",
+                "status": "False",
+                "type": "NamespaceDeletionGroupVersionParsingFailure"
+            },
+            {
+                "lastTransitionTime": "2021-03-26T16:58:33Z",
+                "message": "All content successfully deleted, may be waiting on finalization",
+                "reason": "ContentDeleted",
+                "status": "False",
+                "type": "NamespaceDeletionContentFailure"
+            },
+            {
+                "lastTransitionTime": "2021-03-26T16:58:33Z",
+                "message": "Some resources are remaining: clusteralertgroups.management.cattle.io has 5 resource instances, nodes.management.cattle.io has 1 resource instances",
+                "reason": "SomeResourcesRemain",
+                "status": "True",
+                "type": "NamespaceContentRemaining"
+            },
+            {
+                "lastTransitionTime": "2021-03-26T16:58:33Z",
+                "message": "Some content in the namespace has finalizers remaining: clusterscoped.controller.cattle.io/cluster-alert-group-lifecycle_local in 5 resource instances, controller.cattle.io/node-controller in 1 resource instances",
+                "reason": "SomeFinalizersRemain",
+                "status": "True",
+                "type": "NamespaceFinalizersRemaining"
+            }
+        ],
+        "phase": "Terminating"
+    }
+}

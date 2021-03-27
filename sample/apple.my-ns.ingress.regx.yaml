@@ -2,7 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/server-snippet: |
+      if ($uri ~* "/apple1/.*") {
+          rewrite ^/apple1/(.*) /$1 break;
+      }
+    nginx.ingress.kubernetes.io/use-regex: "true"
   name: rancher-k8s-ingress
   namespace: my-ns
 spec:

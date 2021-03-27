@@ -2,7 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/rewrite-target: /$1
   name: rancher-k8s-ingress
   namespace: my-ns
 spec:
@@ -15,7 +16,14 @@ spec:
             name: apple-service
             port:
               number: 5678
-        path: /apple
+        path: /apple/banana/(.*)
+        pathType: Prefix 
+      - backend:
+          service:
+            name: apple-service
+            port:
+              number: 5678
+        path: /apple/(.*)
         pathType: Prefix 
 status:
   loadBalancer:

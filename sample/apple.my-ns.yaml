@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: apple-app
-      image: apple:v1
+      image: apple:v2
       args:
         - "-text=apple"
 
