@@ -41,3 +41,9 @@ func main() {
 		fmt.Printf("[%d] %s\n", i, node.GetName())
 	}
 }
+
+/*
+ kubectl get nodes
+NAME             STATUS   ROLES    AGE   VERSION
+docker-desktop   Ready    <none>   24d   v1.19.7
+*/
