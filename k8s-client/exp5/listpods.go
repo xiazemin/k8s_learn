@@ -62,9 +62,21 @@ func (p Pod) ListPods() ([]string, error) {
 func NewPod() (*Pod, error) {
 	namespace := getNamespace()
 	clientset := getClient()
+	ctx := context.TODO()
+	nodes, err := clientset.CoreV1().Nodes().List(ctx, metav1.ListOptions{})
+	for _, n := range nodes.Items {
+		fmt.Println("nodes:", n.Name)
+	}
+	nss, err := clientset.CoreV1().Namespaces().List(ctx, metav1.ListOptions{})
+	for _, n := range nss.Items {
+		fmt.Println("ns:", n.Name)
+	}
+	svcs, err := clientset.CoreV1().Services(namespace).List(ctx, metav1.ListOptions{})
+	for _, s := range svcs.Items {
+		fmt.Println("svc:", s.Name)
+	}
 	pi := clientset.CoreV1().Pods(namespace)
 	fmt.Println(namespace)
-	ctx := context.TODO()
 	/*
 		hostname, err := os.Hostname()
 		if err != nil {
