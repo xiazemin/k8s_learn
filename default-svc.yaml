@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: test-cross-ns
+  namespace: default
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9090
+      targetPort: 5678
+  type: ExternalName
+  sessionAffinity: None
+  externalName: apple-service.my-ns.svc.cluster.local
