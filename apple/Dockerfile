@@ -1,4 +1,4 @@
-FROM arm64v8/golang AS build-env
+FROM arm64v8/golang:latest AS build-env
 ENV GO111MODULE=on
 ENV CGO_ENABLED 0
 ADD  ./main.go /go/src/app/

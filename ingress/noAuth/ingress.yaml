@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-with-auth
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  #The Ingress "ingress-with-auth" is invalid: spec.rules[0].host: Invalid value: "127.0.0.1": must be a DNS name, not an IP address
+  - host: www.xzm.com
+    http:
+      paths:
+      #The Ingress "ingress-with-auth" is invalid: spec.rules[0].http.paths[0].pathType: Required value: pathType must be specified
+      - pathType: Prefix
+        path: /
+        backend:
+          #unknown field "serviceName" in io.k8s.api.networking.v1.IngressBackend, ValidationError(Ingress.spec.rules[0].http.paths[0].backend): unknown field "servicePort" in io.k8s.api.networking.v1.IngressBackend]; if you choose to ignore these errors, turn validation off with --validate=false
+          #serviceName: http-svc
+          #servicePort: 80
+          service:
+            name: apple-service
+            port:
+              number: 5678

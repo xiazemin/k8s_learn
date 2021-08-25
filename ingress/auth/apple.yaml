@@ -1,0 +1,27 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: apple-app
+  labels:
+    app: apple
+spec:
+  containers:
+    - name: apple-app
+      image: apple:5678
+      args:
+        - "-text=apple"
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: apple-service
+spec:
+  type: NodePort #外网访问方式 NodePort 或者 LoadBanlace 默认是ClusterIP
+  selector:
+    app: apple
+  ports:
+    - port: 5678 # Default port for image  集群内部访问
+    #The Service "apple-service" is invalid: spec.ports[0].nodePort: Invalid value: 8081: provided port is not in the valid range. The range of valid ports is 30000-32767
+      nodePort: 30080 #外部访问
