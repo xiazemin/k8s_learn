@@ -85,3 +85,15 @@ xiazemin@localhost auth % curl www.xzm.com
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html>
 <head><title>403 Forbidden</title></head>
+
+原因：这个域名是真的域名，改下curl www.xzm-text789.com
+curl: (6) Could not resolve host: www.xzm-text789.com
+
+https://kubernetes.io/zh/docs/tasks/access-application-cluster/ingress-minikube/
+
+https://www.bookstack.cn/read/feiskyer-kubernetes-handbook-202005/practice-minikube-ingress.md
+
+
+https://stackoverflow.com/questions/48244233/starting-an-ingress-service-on-docker-for-mac
+
+https://github.com/jnewland/local-dev-with-docker-for-mac-kubernetes

@@ -7,8 +7,10 @@ metadata:
 spec:
   rules:
   #The Ingress "ingress-with-auth" is invalid: spec.rules[0].host: Invalid value: "127.0.0.1": must be a DNS name, not an IP address
-  - host: www.xzm.com
-    http:
+  #- host: apple-app
+    #www.xzm-text789.com或者service的名字都不行，所以不指定域名
+  #error: error validating "noAuth/ingress.yaml": error validating data: ValidationError(Ingress.spec.rules): invalid type for io.k8s.api.networking.v1.IngressSpec.rules: got "map", expected "array"; if you choose to ignore these errors, turn validation off with --validate=false
+   - http:
       paths:
       #The Ingress "ingress-with-auth" is invalid: spec.rules[0].http.paths[0].pathType: Required value: pathType must be specified
       - pathType: Prefix

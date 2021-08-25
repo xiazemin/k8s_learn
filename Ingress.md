@@ -507,3 +507,22 @@ banana
 
 
 https://github.com/jet/kube-webhook-certgen
+
+ kubectl get pods -o wide
+NAME        READY   STATUS    RESTARTS   AGE    IP          NODE             NOMINATED NODE   READINESS GATES
+apple-app   1/1     Running   0          165m   10.1.0.10   docker-desktop   <none>           <none>
+
+
+ingress controller 没有起来
+quay.io/kubernetes-ingress-controller/nginx-ingress-controller   0.26.1
+
+https://kubernetes.github.io/ingress-nginx/
+
+It is built around the Kubernetes Ingress resource, using a ConfigMap to store the NGINX configuration.
+
+https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop
+
+
+curl -o ingress-controller.yaml https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.0/deploy/static/provider/cloud/deploy.yaml
+
+
