@@ -5,6 +5,8 @@ metadata:
   annotations:
     # type of authentication
     nginx.ingress.kubernetes.io/auth-type: basic
+    # prevent the controller from redirecting (308) to HTTPS
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
     # name of the secret that contains the user/password definitions
     nginx.ingress.kubernetes.io/auth-secret: basic-auth
     # message to display with an appropriate context why the authentication is required
@@ -12,12 +14,13 @@ metadata:
 spec:
   rules:
   #The Ingress "ingress-with-auth" is invalid: spec.rules[0].host: Invalid value: "127.0.0.1": must be a DNS name, not an IP address
-  - host: www.xzm.com
-    http:
+  #Error from server (InternalError): error when creating "ingress-with-auth.yaml": Internal error occurred: failed calling webhook "validate.nginx.ingress.kubernetes.io": an error on the server ("") has prevented the request from succeeding
+  #- host: www.xzm.com
+   - http:
       paths:
       #The Ingress "ingress-with-auth" is invalid: spec.rules[0].http.paths[0].pathType: Required value: pathType must be specified
       - pathType: Prefix
-        path: /
+        path: /apple
         backend:
           #unknown field "serviceName" in io.k8s.api.networking.v1.IngressBackend, ValidationError(Ingress.spec.rules[0].http.paths[0].backend): unknown field "servicePort" in io.k8s.api.networking.v1.IngressBackend]; if you choose to ignore these errors, turn validation off with --validate=false
           #serviceName: http-svc

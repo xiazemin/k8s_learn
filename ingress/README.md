@@ -68,3 +68,17 @@ diff
 - appProtocol: https
 - nodeSelector:
 - kubernetes.io/os: linux
+
+
+修改到default ns 
+namespace: ingress-nginx
+namespace: default
+
+
+curl 127.0.0.1
+404 page not found
+
+ curl 127.0.0.1/apple
+/apple%    
+
+问题解决

@@ -1,0 +1,95 @@
+Name:         ingress-nginx-admission
+Namespace:    
+Labels:       app.kubernetes.io/component=admission-webhook
+              app.kubernetes.io/instance=ingress-nginx
+              app.kubernetes.io/managed-by=Helm
+              app.kubernetes.io/name=ingress-nginx
+              app.kubernetes.io/version=0.44.0
+              helm.sh/chart=ingress-nginx-3.23.0
+Annotations:  <none>
+API Version:  admissionregistration.k8s.io/v1
+Kind:         ValidatingWebhookConfiguration
+Metadata:
+  Creation Timestamp:  2021-08-25T06:51:40Z
+  Generation:          2
+  Managed Fields:
+    API Version:  admissionregistration.k8s.io/v1
+    Fields Type:  FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .:
+          f:kubectl.kubernetes.io/last-applied-configuration:
+        f:labels:
+          .:
+          f:app.kubernetes.io/component:
+          f:app.kubernetes.io/instance:
+          f:app.kubernetes.io/managed-by:
+          f:app.kubernetes.io/name:
+          f:app.kubernetes.io/version:
+          f:helm.sh/chart:
+      f:webhooks:
+        .:
+        k:{"name":"validate.nginx.ingress.kubernetes.io"}:
+          .:
+          f:admissionReviewVersions:
+          f:clientConfig:
+            .:
+            f:service:
+              .:
+              f:name:
+              f:namespace:
+              f:path:
+              f:port:
+          f:failurePolicy:
+          f:matchPolicy:
+          f:name:
+          f:namespaceSelector:
+          f:objectSelector:
+          f:rules:
+          f:sideEffects:
+          f:timeoutSeconds:
+    Manager:      kubectl-client-side-apply
+    Operation:    Update
+    Time:         2021-08-25T06:51:40Z
+    API Version:  admissionregistration.k8s.io/v1
+    Fields Type:  FieldsV1
+    fieldsV1:
+      f:webhooks:
+        k:{"name":"validate.nginx.ingress.kubernetes.io"}:
+          f:clientConfig:
+            f:caBundle:
+    Manager:         kubectl-patch
+    Operation:       Update
+    Time:            2021-08-25T11:17:50Z
+  Resource Version:  118540
+  UID:               850e3e95-03d9-4633-90ee-f7e3227ec282
+Webhooks:
+  Admission Review Versions:
+    v1
+  Client Config:
+    Ca Bundle:  LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJkVENDQVJ1Z0F3SUJBZ0lRR1JadXplNytzbnAvRGs0akZ5cTh3VEFLQmdncWhrak9QUVFEQWpBUE1RMHcKQ3dZRFZRUUtFd1J1YVd3eE1DQVhEVEl4TURneU5UQTJNVEF5TmxvWUR6SXhNakV3T0RBeE1EWXhNREkyV2pBUApNUTB3Q3dZRFZRUUtFd1J1YVd3eE1Ga3dFd1lIS29aSXpqMENBUVlJS29aSXpqMERBUWNEUWdBRTFoc05wK243CnRtZ2lBNlQzY1pFNVBPSE00WUJjcHlJS1V4UkhHeWVheFhNVGEzUDhCWnBDQWh4YkZRYVZWZjVrSkVBY2FwK04KQ0ZOKy8yR2dVZmROenFOWE1GVXdEZ1lEVlIwUEFRSC9CQVFEQWdJRU1CTUdBMVVkSlFRTU1Bb0dDQ3NHQVFVRgpCd01CTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkhyOG9CaGtpSWIzblArSU5ieDZNUmFJClRMWkhNQW9HQ0NxR1NNNDlCQU1DQTBnQU1FVUNJSFFiY215ZGtUT1ltODFZKytZYVl6OHVtbUgzTEt3bUFaVFIKTmhnUTZaUXlBaUVBMEJQOFR2cjE0YXBaR1dUTDFsanY0MTEwdVArWWxvcWpuRis1NFV0TVJRTT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    Service:
+      Name:        ingress-nginx-controller-admission
+      Namespace:   default
+      Path:        /networking/v1/ingresses
+      Port:        443
+  Failure Policy:  Fail
+  Match Policy:    Equivalent
+  Name:            validate.nginx.ingress.kubernetes.io
+  Namespace Selector:
+  Object Selector:
+  Rules:
+    API Groups:
+      networking.k8s.io
+    API Versions:
+      v1
+    Operations:
+      CREATE
+      UPDATE
+    Resources:
+      ingresses
+    Scope:          *
+  Side Effects:     None
+  Timeout Seconds:  10
+Events:             <none>
