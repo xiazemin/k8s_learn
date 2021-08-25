@@ -51,3 +51,20 @@ jettech/kube-webhook-certgen:v1.5.1
 quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.26.1
 
 registry.cn-hangzhou.aliyuncs.com/acs/aliyun-ingress-controller:v0.44.0.1-5e842447b-aliyun
+
+
+cp ../ingress-nginx.v7.yaml ingress-controller.yaml 
+
+diff
+
++automountServiceAccountToken: true
+-app.kubernetes.io/version: 1.0.0
++app.kubernetes.io/version: 0.44.0
+-helm.sh/chart: ingress-nginx-4.0.1
++helm.sh/chart: ingress-nginx-3.23.0
+- networking.k8s.io
++ extensions
++ networking.k8s.io   # k8s 1.14+
+- appProtocol: https
+- nodeSelector:
+- kubernetes.io/os: linux
