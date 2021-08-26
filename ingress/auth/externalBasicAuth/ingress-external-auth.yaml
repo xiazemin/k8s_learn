@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: https://httpbin.org/basic-auth/user/passwd
+  creationTimestamp: 2016-10-03T13:50:35Z
+  generation: 1
+  name: external-auth
+  namespace: default
+  resourceVersion: "2068378"
+  selfLink: /apis/networking/v1/namespaces/default/ingresses/external-auth
+  uid: 5c388f1d-8970-11e6-9004-080027d2dc94
+spec:
+  rules:
+  #- host: external-auth-01.sample.com
+   - http:
+      paths:
+      - pathType: Prefix
+        path: /apple
+        backend:
+          service:
+            name: apple-service
+            port:
+              number: 5678
+#status:
+#  loadBalancer:
+#    ingress:
+#    - ip: 172.17.4.99
