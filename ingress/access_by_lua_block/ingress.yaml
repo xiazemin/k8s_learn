@@ -1,0 +1,54 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-with-auth
+  annotations:
+    nginx.ingress.kubernetes.io/server-snippet: |
+      access_by_lua_block {
+          local header = ngx.req.get_headers()
+          if header.token then
+              local LIMIT = 100
+              local DELAY = 10
+
+              local red = require "resty.redis"
+              local redis = red:new()
+              redis:set_timeout(1000)
+              local ok, err = redis:connect("redis", 6679)
+              if not ok then
+                  ngx.status = 500
+                  ngx.say("<h1>系统开小差了</h1>")
+                  return
+              end
+
+              local res, err = redis:auth("123456")
+              if not res then
+                  ngx.status = 500
+                  ngx.say("<h1>系统开小差了</h1>")
+                  return
+              end
+
+              local now = ngx.now()
+              local ok, err = redis:eval('local oldest = redis.call("lindex", ARGV[1], -1);if oldest then if redis.call("llen", ARGV[1]) >= tonumber(KEYS[1]) then if (ARGV[2] - oldest) < tonumber(KEYS[2]) then return nil end end end;redis.call("lpush", ARGV[1], ARGV[2]);redis.call("expire", ARGV[1], KEYS[1]);redis.call("ltrim", ARGV[1], 0, KEYS[1]); return 1', 2, LIMIT-1, DELAY, "limit:"..ngx.md5(header.token), now)
+
+              if ok ~= 1 then
+                  ngx.status = 519
+                  ngx.say("<h1>系统繁忙</h1>")
+                  redis:set_keepalive(10000, 100)
+                  return
+              end
+
+              redis:set_keepalive(10000, 100)
+          end
+      }
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+   - http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: apple-service
+            port:
+              number: 5678
