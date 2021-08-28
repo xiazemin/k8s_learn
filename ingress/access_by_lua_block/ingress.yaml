@@ -13,10 +13,10 @@ metadata:
               local red = require "resty.redis"
               local redis = red:new()
               redis:set_timeout(1000)
-              local ok, err = redis:connect("redis", 6679)
+              local ok, err = redis:connect("redis.default.svc.cluster.local", 6379)
               if not ok then
                   ngx.status = 500
-                  ngx.say("<h1>系统开小差了</h1>")
+                  ngx.say("<h1>系统开小差了</h1>",err)
                   return
               end
 

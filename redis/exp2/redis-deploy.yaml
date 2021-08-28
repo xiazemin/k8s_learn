@@ -1,0 +1,97 @@
+## Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  type: NodePort
+  ports:
+  - name: redis
+    port: 6379
+    nodePort: 30379
+    targetPort: 6379
+  selector:
+    app: redis
+---
+## Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:     
+      # 进行初始化操作，修改系统配置，解决 Redis 启动时提示的警告信息
+      initContainers:
+        - name: system-init 
+          image: busybox:1.32
+          imagePullPolicy: IfNotPresent
+          command: 
+            - "sh"
+            - "-c"
+            - "echo 2000 > /proc/sys/net/core/somaxconn && echo never > /sys/kernel/mm/transparent_hugepage/enabled"
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          volumeMounts:
+            - name: sys
+              mountPath: /sys
+      containers:
+      - name: redis
+        image: redis:5.0.8
+        command: 
+          - "sh"
+          - "-c"
+          - "redis-server /usr/local/etc/redis/redis.conf"
+        ports:
+        - containerPort: 6379
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi   #注意，这里的内存限制要和上面的 ConfigMap 中 maxmemory 参数限制的内存大小保持一致
+          requests:
+            cpu: 1000m
+            memory: 1024Mi
+        livenessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 300
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: config
+          mountPath:  /usr/local/etc/redis/redis.conf
+          subPath: redis.conf
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: redis
+      - name: config      
+        configMap:
+          name: redis-config
+      - name: sys
+        hostPath: 
+          path: /sys
