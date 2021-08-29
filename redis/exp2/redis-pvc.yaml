@@ -1,0 +1,14 @@
+## PVC
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis
+spec:
+  resources:
+    requests:
+      storage: 1Gi         #设置 pvc 存储资源大小
+  accessModes:
+  - ReadWriteOnce
+  selector:
+    matchLabels:
+      app: redis          #根据 Label 选择对应 PV
