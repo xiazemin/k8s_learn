@@ -10,9 +10,14 @@ import (
 
 func main() {
 	ctx := context.Background()
-	endpoint := "127.0.0.1:9000"
-	accessKeyID := "AKIAIOSFODNN7EXAMPLE"
-	secretAccessKey := "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+	endpoint := "127.0.0.1:30000"
+	accessKeyID := "admin123"
+	secretAccessKey := "admin123"
+	/*
+		endpoint := "127.0.0.1:9000"
+		accessKeyID := "AKIAIOSFODNN7EXAMPLE"
+		secretAccessKey := "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+	*/
 	useSSL := false
 
 	// Initialize minio client object.

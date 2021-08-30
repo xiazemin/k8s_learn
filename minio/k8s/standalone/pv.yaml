@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    app: minio
+    release: minio
+  name: minio
+  namespace: default
+spec:
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: minio-pv-claim
+    namespace: default
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  hostPath:
+    path: /Users/xiazemin/source/k8s_learn/minio/k8s/standalone/minio/
