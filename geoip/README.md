@@ -11,3 +11,4 @@ gzip: GeoLite2-City.mmdb.gz: uncompress failed
 
 go mod init geoip
 
+https://github.com/oschwald/maxminddb-golang
