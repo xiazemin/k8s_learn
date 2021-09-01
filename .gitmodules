@@ -1,0 +1,3 @@
+[submodule "geoip/maxminddb-golang"]
+	path = geoip/maxminddb-golang
+	url = https://github.com/oschwald/maxminddb-golang
