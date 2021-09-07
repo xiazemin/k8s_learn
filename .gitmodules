@@ -1,3 +1,6 @@
 [submodule "geoip/maxminddb-golang"]
 	path = geoip/maxminddb-golang
 	url = https://github.com/oschwald/maxminddb-golang
+[submodule "kafka/sarama/sarama"]
+	path = kafka/sarama/sarama
+	url = https://github.com/Shopify/sarama
