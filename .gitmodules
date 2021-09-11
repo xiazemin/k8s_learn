@@ -7,3 +7,9 @@
 [submodule "kafka/sarama/sarama"]
 	path = kafka/sarama/sarama
 	url = https://github.com/Shopify/sarama
+[submodule "k8s-docker-desktop-for-mac"]
+	path = k8s-docker-desktop-for-mac
+	url = https://github.com/maguowei/k8s-docker-desktop-for-mac
+[submodule "k8s-for-docker-desktop"]
+	path = k8s-for-docker-desktop
+	url = https://github.com/AliyunContainerService/k8s-for-docker-desktop
