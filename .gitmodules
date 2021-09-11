@@ -1,3 +1,6 @@
 [submodule "geoip/maxminddb-golang"]
 	path = geoip/maxminddb-golang
 	url = https://github.com/oschwald/maxminddb-golang
+[submodule "kafka/librdkafka"]
+	path = kafka/librdkafka
+	url = https://github.com/edenhill/librdkafka

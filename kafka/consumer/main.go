@@ -26,7 +26,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/confluentinc/confluent-kafka-go/kafka"
+	"gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 )
 
 func main() {
@@ -87,7 +87,8 @@ func main() {
 				if e.Headers != nil {
 					fmt.Printf("%% Headers: %v\n", e.Headers)
 				}
-				e.TopicPartition.Offset = e.TopicPartition.Offset + 1
+				// e.TopicPartition.Offset = e.TopicPartition.Offset + 1
+				e.TopicPartition.Offset = kafka.OffsetEnd
 				// store, err := c.StoreOffsets([]kafka.TopicPartition{e.TopicPartition})
 				store, err := c.CommitOffsets([]kafka.TopicPartition{e.TopicPartition})
 				fmt.Println("comsume :", i, "--->", store, err)
