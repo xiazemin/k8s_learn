@@ -4,3 +4,6 @@
 [submodule "kafka/librdkafka"]
 	path = kafka/librdkafka
 	url = https://github.com/edenhill/librdkafka
+[submodule "kafka/sarama/sarama"]
+	path = kafka/sarama/sarama
+	url = https://github.com/Shopify/sarama
