@@ -13,3 +13,6 @@
 [submodule "k8s-for-docker-desktop"]
 	path = k8s-for-docker-desktop
 	url = https://github.com/AliyunContainerService/k8s-for-docker-desktop
+[submodule "redis/redcon"]
+	path = redis/redcon
+	url = https://github.com/tidwall/redcon
