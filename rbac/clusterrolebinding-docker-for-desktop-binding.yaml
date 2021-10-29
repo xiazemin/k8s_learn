@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: "2021-08-23T03:19:50Z"
+  name: docker-for-desktop-binding
+  resourceVersion: "540"
+  uid: b2187a7c-5077-4bfd-9a6d-79a5ac7ff446
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:serviceaccounts
+  namespace: kube-system
