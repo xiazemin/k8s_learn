@@ -16,3 +16,6 @@
 [submodule "redis/redcon"]
 	path = redis/redcon
 	url = https://github.com/tidwall/redcon
+[submodule "CRD/sample-controller"]
+	path = CRD/sample-controller
+	url = https://github.com/kubernetes/sample-controller
