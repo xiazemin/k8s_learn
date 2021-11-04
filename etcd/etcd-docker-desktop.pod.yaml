@@ -1,0 +1,146 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubeadm.kubernetes.io/etcd.advertise-client-urls: https://192.168.65.4:2379
+    kubernetes.io/config.hash: 5d9d97b8d8daed31d6fd5c6d386c29c5
+    kubernetes.io/config.mirror: 5d9d97b8d8daed31d6fd5c6d386c29c5
+    kubernetes.io/config.seen: "2021-08-23T03:18:46.987692420Z"
+    kubernetes.io/config.source: file
+  creationTimestamp: "2021-08-23T03:19:05Z"
+  labels:
+    component: etcd
+    tier: control-plane
+  name: etcd-docker-desktop
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: v1
+    controller: true
+    kind: Node
+    name: docker-desktop
+    uid: 347633bf-0659-46b6-934c-b935add76a9e
+  resourceVersion: "1872322"
+  uid: 870ff229-c255-47db-843f-52fbfa23d68a
+spec:
+  containers:
+  - command:
+    - etcd
+    - --advertise-client-urls=https://192.168.65.4:2379
+    - --cert-file=/run/config/pki/etcd/server.crt
+    - --client-cert-auth=true
+    - --data-dir=/var/lib/etcd
+    - --initial-advertise-peer-urls=https://192.168.65.4:2380
+    - --initial-cluster=docker-desktop=https://192.168.65.4:2380
+    - --key-file=/run/config/pki/etcd/server.key
+    - --listen-client-urls=https://127.0.0.1:2379,https://192.168.65.4:2379
+    - --listen-metrics-urls=http://127.0.0.1:2381
+    - --listen-peer-urls=https://192.168.65.4:2380
+    - --name=docker-desktop
+    - --peer-cert-file=/run/config/pki/etcd/peer.crt
+    - --peer-client-cert-auth=true
+    - --peer-key-file=/run/config/pki/etcd/peer.key
+    - --peer-trusted-ca-file=/run/config/pki/etcd/ca.crt
+    - --snapshot-count=10000
+    - --trusted-ca-file=/run/config/pki/etcd/ca.crt
+    image: k8s.gcr.io/etcd:3.4.13-0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 127.0.0.1
+        path: /health
+        port: 2381
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 15
+    name: etcd
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+    startupProbe:
+      failureThreshold: 24
+      httpGet:
+        host: 127.0.0.1
+        path: /health
+        port: 2381
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 15
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/lib/etcd
+      name: etcd-data
+    - mountPath: /run/config/pki/etcd
+      name: etcd-certs
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostNetwork: true
+  nodeName: docker-desktop
+  preemptionPolicy: PreemptLowerPriority
+  priority: 2000001000
+  priorityClassName: system-node-critical
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    operator: Exists
+  volumes:
+  - hostPath:
+      path: /run/config/pki/etcd
+      type: DirectoryOrCreate
+    name: etcd-certs
+  - hostPath:
+      path: /var/lib/etcd
+      type: DirectoryOrCreate
+    name: etcd-data
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2021-10-29T08:23:09Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2021-10-29T08:23:23Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2021-10-29T08:23:23Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2021-10-29T08:23:09Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://9d2f3cf9d7bc9a933a216f6560eb22a4c62d59555bd449161ce8a58afce29d4e
+    image: k8s.gcr.io/etcd:3.4.13-0
+    imageID: docker://sha256:05b738aa1bc6355db8a2ee8639f3631b908286e43f584a3d2ee0c472de033c28
+    lastState:
+      terminated:
+        containerID: docker://b850fdd8612e63a2d571f82fd6c0b135d01b00a7175972f9da1b7731d5557fa0
+        exitCode: 255
+        finishedAt: "2021-10-29T08:21:13Z"
+        reason: Error
+        startedAt: "2021-10-25T01:55:39Z"
+    name: etcd
+    ready: true
+    restartCount: 13
+    started: true
+    state:
+      running:
+        startedAt: "2021-10-29T08:23:10Z"
+  hostIP: 192.168.65.4
+  phase: Running
+  podIP: 192.168.65.4
+  podIPs:
+  - ip: 192.168.65.4
+  qosClass: Burstable
+  startTime: "2021-10-29T08:23:09Z"

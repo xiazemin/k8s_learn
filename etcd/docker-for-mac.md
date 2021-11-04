@@ -183,9 +183,9 @@ kube-dns   ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   70d
 
 
  % kubectl describe pod etcd-docker-desktop -n kube-system |grep 'Container ID'
-    Container ID:  docker://9d2f3cf9d7bc9a933a216f6560eb22a4c62d59555bd449161ce8a58afce29d4e
+    Container ID:  docker://57861b0b93ae212cc9bd9d7805f569ddfe7932ebd5a4d1cb30463cdcea943053
 
- % docker exec -it  9d2f3cf9d7bc9a933a216f6560eb22a4c62d59555bd449161ce8a58afce29d4e sh
+ % docker exec -it  57861b0b93ae212cc9bd9d7805f569ddfe7932ebd5a4d1cb30463cdcea943053 sh
 sh-5.0#
 
 

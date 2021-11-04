@@ -40,3 +40,14 @@ Error: context deadline exceeded
 
 
 https://csunny.gitbook.io/etcd/revision
+
+
+有时我们出于测试的目的，需要一种简单的办法查看一个pod是否能正常提供服务。如果每次通过kubectl的方式创建service就太麻烦了。
+
+这里介绍一种简单的办法：pod的端口转发功能（port forward）。
+
+比如我们想测试下图get pods返回的第一个pod的功能，名称为nginx-6f754dd4b9-74jdn：
+ 执行命令行 kubectl port-forward pod/nginx-6f754dd4b9-74jdn 8080:80
+看到提示信息Forwarding from 127.0.0.1:8080 -> 80, 意思是把当前主机的8080端口映射到nginx pod的80工作端口： 
+
+https://www.cnblogs.com/embedded-linux/p/12657128.html
