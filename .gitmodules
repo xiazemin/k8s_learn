@@ -19,3 +19,12 @@
 [submodule "CRD/sample-controller"]
 	path = CRD/sample-controller
 	url = https://github.com/kubernetes/sample-controller
+[submodule "minio/minio-go"]
+	path = minio/minio-go
+	url = https://github.com/minio/minio-go
+[submodule "minio/minio"]
+	path = minio/minio
+	url = https://github.com/minio/minio
+[submodule "minio/mc"]
+	path = minio/mc
+	url = https://github.com/minio/mc
