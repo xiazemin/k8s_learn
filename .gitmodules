@@ -28,3 +28,6 @@
 [submodule "minio/mc"]
 	path = minio/mc
 	url = https://github.com/minio/mc
+[submodule "netlink"]
+	path = netlink
+	url = https://github.com/vishvananda/netlink
