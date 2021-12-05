@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet 
+metadata:
+  name: apple-rs 
+spec:
+  replicas: 3 #有3个副本
+  selector: #标签选择器
+    matchLabels:
+      app: apple 
+  template: #模板
+    metadata:
+      labels:
+        app: apple 
+    spec:
+      containers:
+      - name: apple-app 
+        image: apple:5678
+        env:
+        - name: GET_HOSTS_FROM 
+          value: dns 
+        ports:
+        - containerPort: 5678

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: apple-ss
+spec:
+  selector:
+    matchLabels:
+      app: apple #必须匹配 .spec.template.metadata.labels
+  serviceName: "apple-headless"  #声明它属于哪个Headless Service.
+  replicas: 3 #副本数
+  template:
+    metadata:
+      labels:
+        app: apple # 必须配置 .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: apple
+        image: apple:5678
+        ports:
+        - containerPort: 5678
+          name: apple
+        volumeMounts:
+        - name: apple-pvc
+          mountPath: /usr/share/apple/html
+
+  volumeClaimTemplates:   #可看作pvc的模板
+  - metadata:
+      name: apple-pvc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "apple-nfs-storage"  #存储类名，改为集群中已存在的 apple-nfs-storage 改为docker.io/hostpath  改为 hostpath
+      resources:
+        requests:
+          storage: 1Ki

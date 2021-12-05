@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: apple-deployment 
+spec:
+  replicas: 3 
+  selector: #标签选择器
+    matchLabels:
+      app: apple 
+  template:
+    metadata:
+      labels:
+        app: apple 
+    spec:
+      containers:   
+      - name: apple-app 
+        image: apple:5678 
+        ports:
+        - containerPort: 5678

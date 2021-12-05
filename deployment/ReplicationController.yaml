@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: apple-rctl
+  labels:
+    name: apple-rctl
+spec:
+  replicas: 2
+  selector:
+    app: apple
+  template:
+    metadata:
+     labels:
+       app: apple
+    spec:
+     containers:
+     - name: apple
+       image: apple:5678
+       env :
+       - name : GET_HOSTS_FROM
+         value : env
+       ports:
+       - containerPort: 5678
