@@ -31,3 +31,6 @@
 [submodule "netlink"]
 	path = netlink
 	url = https://github.com/vishvananda/netlink
+[submodule "kube-mutating-webhook-tutorial"]
+	path = kube-mutating-webhook-tutorial
+	url = https://github.com/morvencao/kube-mutating-webhook-tutorial

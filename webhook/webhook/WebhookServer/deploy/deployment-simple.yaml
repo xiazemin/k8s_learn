@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admission-webhook-example-deployment
+  labels:
+    app: admission-webhook-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admission-webhook-example
+  template:
+    metadata:
+      labels:
+        app: admission-webhook-example
+    spec:
+      # 之前在RBAC中创建的serviceAccount
+      serviceAccount: default
+      containers:
+        - name: admission-webhook-example
+          # 该镜像已经存在
+          image: webhook-example
+          imagePullPolicy: Always
+          args:
+            - -tlsCertFile=/etc/webhook/certs/cert.pem
+            - -tlsKeyFile=/etc/webhook/certs/key.pem
+            - -alsologtostderr
+            - -v=4
+            - 2>&1
+          volumeMounts:
+            - name: webhook-certs
+              mountPath: /etc/webhook/certs
+              readOnly: true
+      volumes:
+        - name: webhook-certs
+          secret:
+            # 第二步中创建的Secret，用于证书认证
+            secretName: sidecar-injector-webhook-certs
