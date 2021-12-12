@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sidecar-injector-webhook-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 7896
+    nodePort: 30896
+    targetPort: 7896
+  selector:
+    app: admission-webhook-example

@@ -23,7 +23,7 @@ func main() {
 
 	pair, err := tls.LoadX509KeyPair(parameters.certFile, parameters.keyFile)
 	if err != nil {
-		glog.Errorf("Failed to load key pair: %v", err)
+		glog.Errorf("Failed to load key pair: %v, %s,%s", err, parameters.certFile, parameters.keyFile)
 	}
 
 	//启动httpserver

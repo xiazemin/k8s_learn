@@ -19,8 +19,9 @@ spec:
       containers:
         - name: admission-webhook-example
           # 该镜像已经存在
-          image: webhook-example
-          imagePullPolicy: Always
+          image: docker.io/library/webhook-example:0.0.5
+          imagePullPolicy: Never #Always
+          command: ["./webhook"] 
           args:
             - -tlsCertFile=/etc/webhook/certs/cert.pem
             - -tlsKeyFile=/etc/webhook/certs/key.pem
@@ -31,6 +32,8 @@ spec:
             - name: webhook-certs
               mountPath: /etc/webhook/certs
               readOnly: true
+          ports:
+            - containerPort: 7896
       volumes:
         - name: webhook-certs
           secret:

@@ -56,7 +56,9 @@ if [ ! -x "$(command -v openssl)" ]; then
 fi
 
 csrName=${service}.${namespace}
-tmpdir=$(mktemp -d)
+tmpdir=./tmp
+#$(mktemp -d) #Linux mktemp命令用于建立暂存文件。
+#mktemp建立的一个暂存文件，供shell script使用
 echo "creating certs in tmpdir ${tmpdir} "
 
 cat <<EOF >> "${tmpdir}"/csr.conf
@@ -83,7 +85,7 @@ kubectl delete csr ${csrName} 2>/dev/null || true
 
 # create  server cert/key CSR and  send to k8s API
 cat <<EOF | kubectl create -f -
-apiVersion: certificates.k8s.io/v1beta1
+apiVersion: certificates.k8s.io/v1beta1 
 kind: CertificateSigningRequest
 metadata:
   name: ${csrName}

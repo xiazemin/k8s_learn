@@ -8,5 +8,6 @@ require (
 	golang.org/x/net v0.0.0-20210825183410-e898025ed96a // indirect
 	golang.org/x/text v0.3.7 // indirect
 	k8s.io/api v0.22.5-rc.0
+	k8s.io/apimachinery v0.22.5-rc.0 // indirect
 	k8s.io/klog/v2 v2.30.0 // indirect
 )
