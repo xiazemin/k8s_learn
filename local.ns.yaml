@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    cattle.io/status: '{"Conditions":[{"Type":"ResourceQuotaInit","Status":"True","Message":"","LastUpdateTime":"2021-11-19T06:56:20Z"},{"Type":"InitialRolesPopulated","Status":"True","Message":"","LastUpdateTime":"2021-11-19T06:56:20Z"}]}'
+    lifecycle.cattle.io/create.namespace-auth: "true"
+  creationTimestamp: "2021-11-19T06:56:19Z"
+  deletionTimestamp: "2021-12-21T16:20:32Z"
+  finalizers:
+  - controller.cattle.io/namespace-auth
+  labels:
+    kubernetes.io/metadata.name: local
+  name: local
+  ownerReferences:
+  - apiVersion: management.cattle.io/v3
+    kind: Cluster
+    name: local
+    uid: bb2a8d31-a3ed-4af7-b001-a7eccd71bb3e
+  resourceVersion: "4263996"
+  uid: 97580dc0-a163-4b05-a933-7c7259db4120

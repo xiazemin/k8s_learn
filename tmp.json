@@ -1,0 +1,20 @@
+{
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": {
+        "annotations": {
+            "cattle.io/status": "{\"Conditions\":[{\"Type\":\"ResourceQuotaInit\",\"Status\":\"True\",\"Message\":\"\",\"LastUpdateTime\":\"2021-11-19T06:56:10Z\"},{\"Type\":\"InitialRolesPopulated\",\"Status\":\"True\",\"Message\":\"\",\"LastUpdateTime\":\"2021-11-19T06:56:16Z\"}]}",
+            "field.cattle.io/projectId": "c-m-r7xmtmss:p-kxzxl",
+            "lifecycle.cattle.io/create.namespace-auth": "true"
+        },
+        "creationTimestamp": "2021-08-23T03:18:57Z",
+        "deletionTimestamp": "2021-12-21T16:27:34Z",
+        "labels": {
+            "field.cattle.io/projectId": "p-kxzxl",
+            "kubernetes.io/metadata.name": "kube-node-lease"
+        },
+        "name": "kube-node-lease",
+        "resourceVersion": "4265424",
+        "uid": "49931361-9336-4b0d-8041-d7c4bd76fb26"
+    }
+}
