@@ -34,3 +34,6 @@
 [submodule "kube-mutating-webhook-tutorial"]
 	path = kube-mutating-webhook-tutorial
 	url = https://github.com/morvencao/kube-mutating-webhook-tutorial
+[submodule "prometheus/k8s-prom"]
+	path = prometheus/k8s-prom
+	url = https://github.com/iKubernetes/k8s-prom
