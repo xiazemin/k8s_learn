@@ -21,3 +21,7 @@ func InsertTemperature() {
 		fmt.Printf("insert number: %f \n", temperature[i])
 	}
 }
+
+func init() {
+	prometheus.MustRegister(TemperatureHistogram)
+}

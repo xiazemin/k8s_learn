@@ -21,3 +21,7 @@ func InsertSummary() {
 		fmt.Printf("Insert number: %f \n", salary[i])
 	}
 }
+
+func init() {
+	prometheus.MustRegister(SalarySummary)
+}

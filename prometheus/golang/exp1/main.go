@@ -13,59 +13,6 @@ import (
 	dto "github.com/prometheus/client_model/go"
 )
 
-var (
-	cpuTemp = prometheus.NewGauge(prometheus.GaugeOpts{
-		Name: "cpu_temperature_celsius",
-		Help: "Current temperature of the CPU.",
-	})
-	hdFailures = prometheus.NewCounterVec(
-		prometheus.CounterOpts{
-			Name: "hd_errors_total",
-			Help: "Number of hard-disk errors.",
-		},
-		[]string{"device"},
-	)
-
-	httpReqs = prometheus.NewCounterVec(
-		prometheus.CounterOpts{
-			Name: "http_requests_total",
-			Help: "How many HTTP requests processed, partitioned by status code and HTTP method.",
-		},
-		[]string{"code", "method"},
-	)
-
-	opsQueued = prometheus.NewGauge(prometheus.GaugeOpts{
-		Namespace: "our_company",
-		Subsystem: "blob_storage",
-		Name:      "ops_queued",
-		Help:      "Number of blob storage operations waiting to be processed.",
-	})
-
-	temps = prometheus.NewHistogram(prometheus.HistogramOpts{
-		Name:    "pond_temperature_celsius",
-		Help:    "The temperature of the frog pond.", // Sorry, we can't measure how badly it smells.
-		Buckets: prometheus.LinearBuckets(20, 5, 5),  // 5 buckets, each 5 centigrade wide.
-	})
-
-	tempsummary = prometheus.NewSummary(prometheus.SummaryOpts{
-		Name:       "pond_temperature_celsius",
-		Help:       "The temperature of the frog pond.",
-		Objectives: map[float64]float64{0.5: 0.05, 0.9: 0.01, 0.99: 0.001},
-	})
-)
-
-func init() {
-	// Metrics have to be registered to be exposed:
-	prometheus.MustRegister(cpuTemp)
-	prometheus.MustRegister(hdFailures)
-	prometheus.MustRegister(opsQueued)
-	prometheus.MustRegister(httpReqs)
-
-	prometheus.MustRegister(TemperatureHistogram)
-	prometheus.MustRegister(SalarySummary)
-
-}
-
 func main() {
 	cpuTemp.Set(65.3)
 	hdFailures.With(prometheus.Labels{"device": "/dev/sda"}).Inc()
@@ -119,13 +66,16 @@ func main() {
 	InsertSummary()
 
 	http.HandleFunc("/httpInc", func(w http.ResponseWriter, r *http.Request) {
-		InsertTemperature()
-		InsertSummary()
-		cpuTemp.Set(65.3 + rand.Float64()*100)
 		for i := 0; i < rand.Int()%100; i++ {
 			hdFailures.With(prometheus.Labels{"device": "/dev/sda"}).Inc()
 		}
 		hdFailures.With(prometheus.Labels{"device": "/dev/sda"}).Inc()
+
+		cpuTemp.Set(65.3 + rand.Float64()*100)
+
+		InsertTemperature()
+		InsertSummary()
+
 		fmt.Fprintf(w, "httpInc")
 		return
 	})
