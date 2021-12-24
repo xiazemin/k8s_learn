@@ -1,0 +1,66 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"addresses":[""],"port":80,"protocol":"HTTP","serviceName":"default:apple-service","ingressName":"default:ingress-with-auth","path":"/","allNodes":false},{"addresses":[""],"port":443,"protocol":"HTTPS","serviceName":"default:apple-service","ingressName":"default:ingress-with-auth","path":"/","allNodes":false}]'
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"nginx.ingress.kubernetes.io/rewrite-target":"/","nginx.ingress.kubernetes.io/server-snippet":"access_by_lua_block {\n    local header = ngx.req.get_headers()\n    if header.token then\n        local LIMIT = 100\n        local DELAY = 10\n\n        local red = require \"resty.redis\"\n        local redis = red:new()\n        redis:set_timeout(1000)\n        local ok, err = redis:connect(\"redis.default.svc.cluster.local\", 6379)\n        if not ok then\n            ngx.status = 500\n            ngx.say(\"\u003ch1\u003e系统开小差了\u003c/h1\u003e\",err)\n            return\n        end\n\n        local res, err = redis:auth(\"123456\")\n        if not res then\n            ngx.status = 500\n            ngx.say(\"\u003ch1\u003e系统开小差了\u003c/h1\u003e\")\n            return\n        end\n\n        local now = ngx.now()\n        local ok, err = redis:eval('local oldest = redis.call(\"lindex\", ARGV[1], -1);if oldest then if redis.call(\"llen\", ARGV[1]) \u003e= tonumber(KEYS[1]) then if (ARGV[2] - oldest) \u003c tonumber(KEYS[2]) then return nil end end end;redis.call(\"lpush\", ARGV[1], ARGV[2]);redis.call(\"expire\", ARGV[1], KEYS[1]);redis.call(\"ltrim\", ARGV[1], 0, KEYS[1]); return 1', 2, LIMIT-1, DELAY, \"limit:\"..ngx.md5(header.token), now)\n\n        if ok ~= 1 then\n            ngx.status = 519\n            ngx.say(\"\u003ch1\u003e系统繁忙\u003c/h1\u003e\")\n            redis:set_keepalive(10000, 100)\n            return\n        end\n\n        redis:set_keepalive(10000, 100)\n    end\n}\n"},"name":"ingress-with-auth","namespace":"default"},"spec":{"rules":[{"http":{"paths":[{"backend":{"service":{"name":"apple-service","port":{"number":5678}}},"path":"/","pathType":"Prefix"}]}}]}}
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/server-snippet: |
+      access_by_lua_block {
+          local header = ngx.req.get_headers()
+          if header.token then
+              local LIMIT = 100
+              local DELAY = 10
+
+              local red = require "resty.redis"
+              local redis = red:new()
+              redis:set_timeout(1000)
+              local ok, err = redis:connect("redis.default.svc.cluster.local", 6379)
+              if not ok then
+                  ngx.status = 500
+                  ngx.say("<h1>系统开小差了</h1>",err)
+                  return
+              end
+
+              local res, err = redis:auth("123456")
+              if not res then
+                  ngx.status = 500
+                  ngx.say("<h1>系统开小差了</h1>")
+                  return
+              end
+
+              local now = ngx.now()
+              local ok, err = redis:eval('local oldest = redis.call("lindex", ARGV[1], -1);if oldest then if redis.call("llen", ARGV[1]) >= tonumber(KEYS[1]) then if (ARGV[2] - oldest) < tonumber(KEYS[2]) then return nil end end end;redis.call("lpush", ARGV[1], ARGV[2]);redis.call("expire", ARGV[1], KEYS[1]);redis.call("ltrim", ARGV[1], 0, KEYS[1]); return 1', 2, LIMIT-1, DELAY, "limit:"..ngx.md5(header.token), now)
+
+              if ok ~= 1 then
+                  ngx.status = 519
+                  ngx.say("<h1>系统繁忙</h1>")
+                  redis:set_keepalive(10000, 100)
+                  return
+              end
+
+              redis:set_keepalive(10000, 100)
+          end
+      }
+  creationTimestamp: "2021-08-27T11:08:55Z"
+  generation: 1
+  name: ingress-with-auth
+  namespace: default
+  resourceVersion: "4405838"
+  uid: 73172c10-3b4b-4086-95d8-e0ac3dc7bb53
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: apple-service
+            port:
+              number: 5678
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost

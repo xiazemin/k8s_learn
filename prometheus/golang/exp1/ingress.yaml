@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-matrix
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  labels:
+    matrix-ingress: matrix-deployment
+spec:
+  rules:
+  #The Ingress "ingress-with-auth" is invalid: spec.rules[0].host: Invalid value: "127.0.0.1": must be a DNS name, not an IP address
+  #- host: apple-app
+    #www.xzm-text789.com或者service的名字都不行，所以不指定域名
+  #error: error validating "noAuth/ingress.yaml": error validating data: ValidationError(Ingress.spec.rules): invalid type for io.k8s.api.networking.v1.IngressSpec.rules: got "map", expected "array"; if you choose to ignore these errors, turn validation off with --validate=false
+   - host: localhost
+     http:
+      paths:
+      #The Ingress "ingress-with-auth" is invalid: spec.rules[0].http.paths[0].pathType: Required value: pathType must be specified
+      - pathType: Prefix
+        path: /
+        backend:
+          #unknown field "serviceName" in io.k8s.api.networking.v1.IngressBackend, ValidationError(Ingress.spec.rules[0].http.paths[0].backend): unknown field "servicePort" in io.k8s.api.networking.v1.IngressBackend]; if you choose to ignore these errors, turn validation off with --validate=false
+          #serviceName: http-svc
+          #servicePort: 80
+          service:
+            name: matrix-deployment
+            port:
+              number: 12345

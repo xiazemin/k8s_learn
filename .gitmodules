@@ -37,3 +37,6 @@
 [submodule "prometheus/k8s-prom"]
 	path = prometheus/k8s-prom
 	url = https://github.com/iKubernetes/k8s-prom
+[submodule "client_golang"]
+	path = client_golang
+	url = https://github.com/prometheus/client_golang
