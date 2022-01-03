@@ -17,6 +17,21 @@ https://kubeless.io/docs/quick-start/
 由于 Kubeless 的功能特性是建立在Kubernetes上的，所以对于熟悉 Kubernetes的人来说非常容易部署 Kubeless， 其主要实现是将用户编写的函数在Kubernetes中转变为 CRD（ Custom Resource Definition，自定义资源）， 并以容器的方式运行在集群中。
 
 
+能力包括：
+
+敏捷构建 - 能够基于用户提交的源码迅速构建可执行的函数，简化部署流程；
+灵活触发 - 能够方便地基于各类事件触发函数的执行，并能方便快捷地集成新的事件源；
+自动伸缩 - 能够根据业务需求，自动完成扩容缩容，无须人工干预。
+
+
+Kubeless 基于 K8s 提供了较为完整的 serverless 解决方案，但和一些商业 serverless 产品还存在一定差距：
+
+Kubeless 并未在镜像拉取、代码下载、容器启动等方面做过多优化，导致函数冷启动时间过长；
+Kubeless 并未过多考虑多租户的问题，如果希望多个用户的函数运行在同一个集群里，还需要进行二次开发。
+
+https://www.cnblogs.com/yunqishequ/p/10057458.html
+
+
 1 Kubeless基本组成
 Kubeless主要由以下三部分组成：
 
