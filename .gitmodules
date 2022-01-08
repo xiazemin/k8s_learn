@@ -40,3 +40,9 @@
 [submodule "client_golang"]
 	path = client_golang
 	url = https://github.com/prometheus/client_golang
+[submodule "Istio/istio"]
+	path = Istio/istio
+	url = https://github.com/istio/istio
+[submodule "Istio/release-builder"]
+	path = Istio/release-builder
+	url = https://github.com/istio/release-builder

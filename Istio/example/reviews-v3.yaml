@@ -4,16 +4,16 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v1"},"name":"reviews-v1","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v1"}},"template":{"metadata":{"labels":{"app":"reviews","version":"v1"}},"spec":{"containers":[{"env":[{"name":"LOG_DIR","value":"/tmp/logs"}],"image":"docker.io/istio/examples-bookinfo-reviews-v1:1.16.2","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}],"securityContext":{"runAsUser":1000},"volumeMounts":[{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/opt/ibm/wlp/output","name":"wlp-output"}]}],"serviceAccountName":"bookinfo-reviews","volumes":[{"emptyDir":{},"name":"wlp-output"},{"emptyDir":{},"name":"tmp"}]}}}}
-  creationTimestamp: "2022-01-03T12:11:14Z"
-  generation: 1
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v3"},"name":"reviews-v3","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v3"}},"template":{"metadata":{"labels":{"app":"reviews","version":"v3"}},"spec":{"containers":[{"env":[{"name":"LOG_DIR","value":"/tmp/logs"}],"image":"docker.io/istio/examples-bookinfo-reviews-v3:1.16.2","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}],"securityContext":{"runAsUser":1000},"volumeMounts":[{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/opt/ibm/wlp/output","name":"wlp-output"}]}],"serviceAccountName":"bookinfo-reviews","volumes":[{"emptyDir":{},"name":"wlp-output"},{"emptyDir":{},"name":"tmp"}]}}}}
+  creationTimestamp: "2022-01-07T02:14:39Z"
+  generation: 2
   labels:
     app: reviews
-    version: v1
-  name: reviews-v1
+    version: v3
+  name: reviews-v3
   namespace: default
-  resourceVersion: "4889443"
-  uid: 081aa7e5-8fdb-4158-afa5-a651c53ac052
+  resourceVersion: "5210807"
+  uid: 1141454a-69d9-4356-85f0-176d6ee2f9fb
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -21,7 +21,7 @@ spec:
   selector:
     matchLabels:
       app: reviews
-      version: v1
+      version: v3
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -32,13 +32,13 @@ spec:
       creationTimestamp: null
       labels:
         app: reviews
-        version: v1
+        version: v3
     spec:
       containers:
       - env:
         - name: LOG_DIR
           value: /tmp/logs
-        image: docker.io/istio/examples-bookinfo-reviews-v1:1.16.2
+        image: docker.io/istio/examples-bookinfo-reviews-v3:1.16.2
         imagePullPolicy: IfNotPresent
         name: reviews
         ports:
@@ -68,19 +68,19 @@ spec:
         name: tmp
 status:
   conditions:
-  - lastTransitionTime: "2022-01-03T12:11:14Z"
-    lastUpdateTime: "2022-01-03T12:11:14Z"
+  - lastTransitionTime: "2022-01-07T02:14:39Z"
+    lastUpdateTime: "2022-01-07T02:14:39Z"
     message: Deployment does not have minimum availability.
     reason: MinimumReplicasUnavailable
     status: "False"
     type: Available
-  - lastTransitionTime: "2022-01-03T12:29:49Z"
-    lastUpdateTime: "2022-01-03T12:29:49Z"
-    message: ReplicaSet "reviews-v1-545db77b95" has timed out progressing.
+  - lastTransitionTime: "2022-01-07T02:24:40Z"
+    lastUpdateTime: "2022-01-07T02:24:40Z"
+    message: ReplicaSet "reviews-v3-84779c7bbc" has timed out progressing.
     reason: ProgressDeadlineExceeded
     status: "False"
     type: Progressing
-  observedGeneration: 1
+  observedGeneration: 2
   replicas: 1
   unavailableReplicas: 1
   updatedReplicas: 1

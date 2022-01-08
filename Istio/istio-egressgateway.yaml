@@ -38,7 +38,7 @@ spec:
     metadata:
       annotations:
         prometheus.io/path: /stats/prometheus
-        prometheus.io/port: "15020"
+        prometheus.io/port: "15021"
         prometheus.io/scrape: "true"
         sidecar.istio.io/inject: "false"
       creationTimestamp: null
@@ -147,7 +147,7 @@ spec:
           value: "true"
         - name: ISTIO_META_CLUSTER_ID
           value: Kubernetes
-        image: docker.io/istio/proxyv2:1.12.1
+        image: docker.io/querycapistio/proxyv2:1.12.1
         imagePullPolicy: IfNotPresent
         name: istio-proxy
         ports:
