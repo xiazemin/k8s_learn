@@ -25,3 +25,12 @@ $ istioctl kube-inject -f demo-red.yaml | kubectl apply -f -
 要使用修改后的 Configmap 或本地 Configmap：
 
 https://istio.io/latest/zh/blog/2019/data-plane-setup/
+
+https://zhuanlan.zhihu.com/p/369068128
+
+kubectl label namespace default istio-injection=enabled
+
+
+ % kubectl label namespace default istio-injection=disabled --overwrite
+namespace/default labeled
+
