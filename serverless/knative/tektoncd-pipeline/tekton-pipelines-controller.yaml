@@ -1,0 +1,193 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"default","app.kubernetes.io/name":"controller","app.kubernetes.io/part-of":"tekton-pipelines","app.kubernetes.io/version":"v0.32.0","pipeline.tekton.dev/release":"v0.32.0","version":"v0.32.0"},"name":"tekton-pipelines-controller","namespace":"tekton-pipelines"},"spec":{"replicas":1,"selector":{"matchLabels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"default","app.kubernetes.io/name":"controller","app.kubernetes.io/part-of":"tekton-pipelines"}},"template":{"metadata":{"labels":{"app":"tekton-pipelines-controller","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"default","app.kubernetes.io/name":"controller","app.kubernetes.io/part-of":"tekton-pipelines","app.kubernetes.io/version":"v0.32.0","pipeline.tekton.dev/release":"v0.32.0","version":"v0.32.0"}},"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"kubernetes.io/os","operator":"NotIn","values":["windows"]}]}]}}},"containers":[{"args":["-kubeconfig-writer-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.32.0@sha256:32fec74288f52ede279f091d8bac91d48ff6538fa3290251339b0075c59d0947","-git-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.32.0@sha256:fe3310b87b9fad4b5139ac93f0e570c25fb97dcb64a876a5b8eebbc877fc12e8","-entrypoint-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/entrypoint:v0.32.0@sha256:7f50901900925357460e6c6c985580f0b69c0d316ade75965228adb8b081614e","-nop-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/nop:v0.32.0@sha256:a8ffddd75b7a7078d5c07d09259d7c5db04614b4c5ba5c43e99b0632034f2479","-imagedigest-exporter-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/imagedigestexporter:v0.32.0@sha256:2b39f19517523df8a00a366a0d3adb815ca2623fc9c51f05dd290773d5d308c7","-pr-image","gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/pullrequest-init:v0.32.0@sha256:632b5086dba4d7f30f5b1e77f9e5e551b06c9e897cf2afc93e100b26f9c32e39","-gsutil-image","gcr.io/google.com/cloudsdktool/cloud-sdk@sha256:27b2c22bf259d9bc1a291e99c63791ba0c27a04d2db0a43241ba0f1f20f4067f","-shell-image","gcr.io/distroless/base@sha256:cfdc553400d41b47fd231b028403469811fcdbc0e69d66ea8030c5a0b5fbac2b","-shell-image-win","mcr.microsoft.com/powershell:nanoserver@sha256:b6d5ff841b78bdf2dfed7550000fd4f3437385b8fa686ec0f010be24777654d6"],"env":[{"name":"SYSTEM_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"AWS_ACCESS_KEY_ID","value":"foobarbaz"},{"name":"AWS_SECRET_ACCESS_KEY","value":"foobarbaz"},{"name":"AWS_DEFAULT_REGION","value":"foobarbaz"},{"name":"CONFIG_DEFAULTS_NAME","value":"config-defaults"},{"name":"CONFIG_LOGGING_NAME","value":"config-logging"},{"name":"CONFIG_OBSERVABILITY_NAME","value":"config-observability"},{"name":"CONFIG_ARTIFACT_BUCKET_NAME","value":"config-artifact-bucket"},{"name":"CONFIG_ARTIFACT_PVC_NAME","value":"config-artifact-pvc"},{"name":"CONFIG_FEATURE_FLAGS_NAME","value":"feature-flags"},{"name":"CONFIG_LEADERELECTION_NAME","value":"config-leader-election"},{"name":"SSL_CERT_FILE","value":"/etc/config-registry-cert/cert"},{"name":"SSL_CERT_DIR","value":"/etc/ssl/certs"},{"name":"METRICS_DOMAIN","value":"tekton.dev/pipeline"}],"image":"gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.32.0@sha256:0e4f92e95c9ae8140ddfc8751bb54cf54e1b00d27aa542c11d5ad8663c5067ae","livenessProbe":{"httpGet":{"path":"/health","port":"probes","scheme":"HTTP"},"initialDelaySeconds":5,"periodSeconds":10,"timeoutSeconds":5},"name":"tekton-pipelines-controller","ports":[{"containerPort":9090,"name":"metrics"},{"containerPort":8008,"name":"profiling"},{"containerPort":8080,"name":"probes"}],"readinessProbe":{"httpGet":{"path":"/readiness","port":"probes","scheme":"HTTP"},"initialDelaySeconds":5,"periodSeconds":10,"timeoutSeconds":5},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"runAsGroup":65532,"runAsUser":65532},"volumeMounts":[{"mountPath":"/etc/config-logging","name":"config-logging"},{"mountPath":"/etc/config-registry-cert","name":"config-registry-cert"}]}],"serviceAccountName":"tekton-pipelines-controller","volumes":[{"configMap":{"name":"config-logging"},"name":"config-logging"},{"configMap":{"name":"config-registry-cert"},"name":"config-registry-cert"}]}}}}
+  creationTimestamp: "2022-01-15T13:31:49Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/name: controller
+    app.kubernetes.io/part-of: tekton-pipelines
+    app.kubernetes.io/version: v0.32.0
+    pipeline.tekton.dev/release: v0.32.0
+    version: v0.32.0
+  name: tekton-pipelines-controller
+  namespace: tekton-pipelines
+  resourceVersion: "5346287"
+  selfLink: /apis/apps/v1/namespaces/tekton-pipelines/deployments/tekton-pipelines-controller
+  uid: c4f2f725-28e8-4b6b-9b81-3be04a3bcc02
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: default
+      app.kubernetes.io/name: controller
+      app.kubernetes.io/part-of: tekton-pipelines
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tekton-pipelines-controller
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: default
+        app.kubernetes.io/name: controller
+        app.kubernetes.io/part-of: tekton-pipelines
+        app.kubernetes.io/version: v0.32.0
+        pipeline.tekton.dev/release: v0.32.0
+        version: v0.32.0
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: NotIn
+                values:
+                - windows
+      containers:
+      - args:
+        - -kubeconfig-writer-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.32.0@sha256:32fec74288f52ede279f091d8bac91d48ff6538fa3290251339b0075c59d0947
+        - -git-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.32.0@sha256:fe3310b87b9fad4b5139ac93f0e570c25fb97dcb64a876a5b8eebbc877fc12e8
+        - -entrypoint-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/entrypoint:v0.32.0@sha256:7f50901900925357460e6c6c985580f0b69c0d316ade75965228adb8b081614e
+        - -nop-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/nop:v0.32.0@sha256:a8ffddd75b7a7078d5c07d09259d7c5db04614b4c5ba5c43e99b0632034f2479
+        - -imagedigest-exporter-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/imagedigestexporter:v0.32.0@sha256:2b39f19517523df8a00a366a0d3adb815ca2623fc9c51f05dd290773d5d308c7
+        - -pr-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/pullrequest-init:v0.32.0@sha256:632b5086dba4d7f30f5b1e77f9e5e551b06c9e897cf2afc93e100b26f9c32e39
+        - -gsutil-image
+        - gcr.io/google.com/cloudsdktool/cloud-sdk@sha256:27b2c22bf259d9bc1a291e99c63791ba0c27a04d2db0a43241ba0f1f20f4067f
+        - -shell-image
+        - gcr.io/distroless/base@sha256:cfdc553400d41b47fd231b028403469811fcdbc0e69d66ea8030c5a0b5fbac2b
+        - -shell-image-win
+        - mcr.microsoft.com/powershell:nanoserver@sha256:b6d5ff841b78bdf2dfed7550000fd4f3437385b8fa686ec0f010be24777654d6
+        env:
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: AWS_ACCESS_KEY_ID
+          value: foobarbaz
+        - name: AWS_SECRET_ACCESS_KEY
+          value: foobarbaz
+        - name: AWS_DEFAULT_REGION
+          value: foobarbaz
+        - name: CONFIG_DEFAULTS_NAME
+          value: config-defaults
+        - name: CONFIG_LOGGING_NAME
+          value: config-logging
+        - name: CONFIG_OBSERVABILITY_NAME
+          value: config-observability
+        - name: CONFIG_ARTIFACT_BUCKET_NAME
+          value: config-artifact-bucket
+        - name: CONFIG_ARTIFACT_PVC_NAME
+          value: config-artifact-pvc
+        - name: CONFIG_FEATURE_FLAGS_NAME
+          value: feature-flags
+        - name: CONFIG_LEADERELECTION_NAME
+          value: config-leader-election
+        - name: SSL_CERT_FILE
+          value: /etc/config-registry-cert/cert
+        - name: SSL_CERT_DIR
+          value: /etc/ssl/certs
+        - name: METRICS_DOMAIN
+          value: tekton.dev/pipeline
+        image: docker.io/aisuko/tektoncd-pipeline-cmd-controller:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: probes
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: tekton-pipelines-controller
+        ports:
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        - containerPort: 8008
+          name: profiling
+          protocol: TCP
+        - containerPort: 8080
+          name: probes
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readiness
+            port: probes
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          runAsGroup: 65532
+          runAsUser: 65532
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/config-logging
+          name: config-logging
+        - mountPath: /etc/config-registry-cert
+          name: config-registry-cert
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: tekton-pipelines-controller
+      serviceAccountName: tekton-pipelines-controller
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: config-logging
+        name: config-logging
+      - configMap:
+          defaultMode: 420
+          name: config-registry-cert
+        name: config-registry-cert
+status:
+  conditions:
+  - lastTransitionTime: "2022-01-15T13:31:55Z"
+    lastUpdateTime: "2022-01-15T13:31:55Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2022-01-15T13:31:50Z"
+    lastUpdateTime: "2022-01-15T13:32:11Z"
+    message: ReplicaSet "tekton-pipelines-controller-6f7f44b85c" is progressing.
+    reason: ReplicaSetUpdated
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1

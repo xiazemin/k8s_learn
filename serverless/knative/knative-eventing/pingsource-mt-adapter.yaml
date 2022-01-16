@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"pingsource-mt-adapter","app.kubernetes.io/name":"knative-eventing","app.kubernetes.io/version":"1.1.0","eventing.knative.dev/release":"v1.1.0"},"name":"pingsource-mt-adapter","namespace":"knative-eventing"},"spec":{"replicas":0,"selector":{"matchLabels":{"eventing.knative.dev/source":"ping-source-controller","sources.knative.dev/role":"adapter"}},"template":{"metadata":{"labels":{"app.kubernetes.io/component":"pingsource-mt-adapter","app.kubernetes.io/name":"knative-eventing","app.kubernetes.io/version":"1.1.0","eventing.knative.dev/release":"v1.1.0","eventing.knative.dev/source":"ping-source-controller","sources.knative.dev/role":"adapter"}},"spec":{"affinity":{"podAntiAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"podAffinityTerm":{"labelSelector":{"matchLabels":{"eventing.knative.dev/source":"ping-source-controller","sources.knative.dev/role":"adapter"}},"topologyKey":"kubernetes.io/hostname"},"weight":100}]}},"containers":[{"env":[{"name":"SYSTEM_NAMESPACE","value":"","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.namespace"}}},{"name":"K_METRICS_CONFIG","value":""},{"name":"K_LOGGING_CONFIG","value":""},{"name":"K_LEADER_ELECTION_CONFIG","value":""},{"name":"K_NO_SHUTDOWN_AFTER","value":""},{"name":"K_SINK_TIMEOUT","value":"-1"},{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}}],"image":"gcr.io/knative-releases/knative.dev/eventing/cmd/mtping@sha256:6a78d2df8eec44bb983ae39952097670fad0556afc6d069fc88fd8347a014698","name":"dispatcher","ports":[{"containerPort":9090,"name":"metrics","protocol":"TCP"}],"resources":{"limits":{"cpu":"1000m","memory":"2048Mi"},"requests":{"cpu":"125m","memory":"64Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true}}],"enableServiceLinks":false,"serviceAccountName":"pingsource-mt-adapter"}}}}
+  creationTimestamp: "2022-01-14T16:25:21Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/component: pingsource-mt-adapter
+    app.kubernetes.io/name: knative-eventing
+    app.kubernetes.io/version: 1.1.0
+    eventing.knative.dev/release: v1.1.0
+  name: pingsource-mt-adapter
+  namespace: knative-eventing
+  resourceVersion: "4845428"
+  selfLink: /apis/apps/v1/namespaces/knative-eventing/deployments/pingsource-mt-adapter
+  uid: fa4c1fdb-acc7-4c3d-b8c3-aed63af5f638
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      eventing.knative.dev/source: ping-source-controller
+      sources.knative.dev/role: adapter
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/component: pingsource-mt-adapter
+        app.kubernetes.io/name: knative-eventing
+        app.kubernetes.io/version: 1.1.0
+        eventing.knative.dev/release: v1.1.0
+        eventing.knative.dev/source: ping-source-controller
+        sources.knative.dev/role: adapter
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  eventing.knative.dev/source: ping-source-controller
+                  sources.knative.dev/role: adapter
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - env:
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: K_METRICS_CONFIG
+        - name: K_LOGGING_CONFIG
+        - name: K_LEADER_ELECTION_CONFIG
+        - name: K_NO_SHUTDOWN_AFTER
+        - name: K_SINK_TIMEOUT
+          value: "-1"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: docker.io/zhku/knative-eventing-mtping:latest
+        imagePullPolicy: IfNotPresent
+        name: dispatcher
+        ports:
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+            memory: 2Gi
+          requests:
+            cpu: 125m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: pingsource-mt-adapter
+      serviceAccountName: pingsource-mt-adapter
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2022-01-14T16:25:23Z"
+    lastUpdateTime: "2022-01-14T16:25:23Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2022-01-14T16:25:22Z"
+    lastUpdateTime: "2022-01-14T16:25:23Z"
+    message: ReplicaSet "pingsource-mt-adapter-5fcb74cff5" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1

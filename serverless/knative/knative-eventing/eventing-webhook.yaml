@@ -1,0 +1,154 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"eventing-webhook","app.kubernetes.io/name":"knative-eventing","app.kubernetes.io/version":"1.1.0","eventing.knative.dev/release":"v1.1.0"},"name":"eventing-webhook","namespace":"knative-eventing"},"spec":{"selector":{"matchLabels":{"app":"eventing-webhook","role":"eventing-webhook"}},"template":{"metadata":{"labels":{"app":"eventing-webhook","app.kubernetes.io/component":"eventing-webhook","app.kubernetes.io/name":"knative-eventing","app.kubernetes.io/version":"1.1.0","eventing.knative.dev/release":"v1.1.0","role":"eventing-webhook"}},"spec":{"affinity":{"podAntiAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"podAffinityTerm":{"labelSelector":{"matchLabels":{"app":"eventing-webhook"}},"topologyKey":"kubernetes.io/hostname"},"weight":100}]}},"containers":[{"env":[{"name":"SYSTEM_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"CONFIG_LOGGING_NAME","value":"config-logging"},{"name":"METRICS_DOMAIN","value":"knative.dev/eventing"},{"name":"WEBHOOK_NAME","value":"eventing-webhook"},{"name":"WEBHOOK_PORT","value":"8443"},{"name":"SINK_BINDING_SELECTION_MODE","value":"exclusion"},{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}}],"image":"gcr.io/knative-releases/knative.dev/eventing/cmd/webhook@sha256:9ca667c4d9c9c02b1549aee6d3fc13f40e8e54322260525665b029983c373ece","livenessProbe":{"httpGet":{"httpHeaders":[{"name":"k-kubelet-probe","value":"webhook"}],"port":8443,"scheme":"HTTPS"},"initialDelaySeconds":20,"periodSeconds":1},"name":"eventing-webhook","ports":[{"containerPort":8443,"name":"https-webhook"},{"containerPort":9090,"name":"metrics"},{"containerPort":8008,"name":"profiling"}],"readinessProbe":{"httpGet":{"httpHeaders":[{"name":"k-kubelet-probe","value":"webhook"}],"port":8443,"scheme":"HTTPS"},"periodSeconds":1},"resources":{"limits":{"cpu":"200m","memory":"200Mi"},"requests":{"cpu":"100m","memory":"50Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true},"terminationMessagePolicy":"FallbackToLogsOnError"}],"enableServiceLinks":false,"serviceAccountName":"eventing-webhook","terminationGracePeriodSeconds":300}}}}
+  creationTimestamp: "2022-01-14T16:25:23Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/component: eventing-webhook
+    app.kubernetes.io/name: knative-eventing
+    app.kubernetes.io/version: 1.1.0
+    eventing.knative.dev/release: v1.1.0
+  name: eventing-webhook
+  namespace: knative-eventing
+  resourceVersion: "4847002"
+  selfLink: /apis/apps/v1/namespaces/knative-eventing/deployments/eventing-webhook
+  uid: f55ea34b-3965-4b27-a7c4-684ac2cb82eb
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: eventing-webhook
+      role: eventing-webhook
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: eventing-webhook
+        app.kubernetes.io/component: eventing-webhook
+        app.kubernetes.io/name: knative-eventing
+        app.kubernetes.io/version: 1.1.0
+        eventing.knative.dev/release: v1.1.0
+        role: eventing-webhook
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: eventing-webhook
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - env:
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: CONFIG_LOGGING_NAME
+          value: config-logging
+        - name: METRICS_DOMAIN
+          value: knative.dev/eventing
+        - name: WEBHOOK_NAME
+          value: eventing-webhook
+        - name: WEBHOOK_PORT
+          value: "8443"
+        - name: SINK_BINDING_SELECTION_MODE
+          value: exclusion
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: docker.io/zhku/knative-eventing-webhook:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            httpHeaders:
+            - name: k-kubelet-probe
+              value: webhook
+            path: /
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 20
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: eventing-webhook
+        ports:
+        - containerPort: 8443
+          name: https-webhook
+          protocol: TCP
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        - containerPort: 8008
+          name: profiling
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            httpHeaders:
+            - name: k-kubelet-probe
+              value: webhook
+            path: /
+            port: 8443
+            scheme: HTTPS
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 50Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: FallbackToLogsOnError
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: eventing-webhook
+      serviceAccountName: eventing-webhook
+      terminationGracePeriodSeconds: 300
+status:
+  conditions:
+  - lastTransitionTime: "2022-01-14T16:25:29Z"
+    lastUpdateTime: "2022-01-14T16:25:29Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2022-01-14T16:35:37Z"
+    lastUpdateTime: "2022-01-14T16:35:37Z"
+    message: ReplicaSet "eventing-webhook-7576cf5d79" has timed out progressing.
+    reason: ProgressDeadlineExceeded
+    status: "False"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
