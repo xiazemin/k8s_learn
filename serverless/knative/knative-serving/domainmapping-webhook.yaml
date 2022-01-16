@@ -1,0 +1,153 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"domain-mapping","app.kubernetes.io/name":"knative-serving","app.kubernetes.io/version":"1.1.0","serving.knative.dev/release":"v1.1.0"},"name":"domainmapping-webhook","namespace":"knative-serving"},"spec":{"selector":{"matchLabels":{"app":"domainmapping-webhook","role":"domainmapping-webhook"}},"template":{"metadata":{"annotations":{"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"},"labels":{"app":"domainmapping-webhook","app.kubernetes.io/component":"domain-mapping","app.kubernetes.io/name":"knative-serving","app.kubernetes.io/version":"1.1.0","role":"domainmapping-webhook","serving.knative.dev/release":"v1.1.0"}},"spec":{"affinity":{"podAntiAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"podAffinityTerm":{"labelSelector":{"matchLabels":{"app":"domainmapping-webhook"}},"topologyKey":"kubernetes.io/hostname"},"weight":100}]}},"containers":[{"env":[{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"SYSTEM_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"CONFIG_LOGGING_NAME","value":"config-logging"},{"name":"CONFIG_OBSERVABILITY_NAME","value":"config-observability"},{"name":"WEBHOOK_PORT","value":"8443"},{"name":"METRICS_DOMAIN","value":"knative.dev/serving"}],"image":"gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook@sha256:6ccc1f6ac07d27e97d96c502b4c6e928d5fb3abd165ae7670e94a57788416c75","livenessProbe":{"failureThreshold":6,"httpGet":{"httpHeaders":[{"name":"k-kubelet-probe","value":"webhook"}],"port":8443,"scheme":"HTTPS"},"initialDelaySeconds":20,"periodSeconds":1},"name":"domainmapping-webhook","ports":[{"containerPort":9090,"name":"metrics"},{"containerPort":8008,"name":"profiling"},{"containerPort":8443,"name":"https-webhook"}],"readinessProbe":{"httpGet":{"httpHeaders":[{"name":"k-kubelet-probe","value":"webhook"}],"port":8443,"scheme":"HTTPS"},"periodSeconds":1},"resources":{"limits":{"cpu":"500m","memory":"500Mi"},"requests":{"cpu":"100m","memory":"100Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true}}],"serviceAccountName":"controller","terminationGracePeriodSeconds":300}}}}
+  creationTimestamp: "2022-01-14T16:11:50Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/component: domain-mapping
+    app.kubernetes.io/name: knative-serving
+    app.kubernetes.io/version: 1.1.0
+    serving.knative.dev/release: v1.1.0
+  name: domainmapping-webhook
+  namespace: knative-serving
+  resourceVersion: "4844918"
+  selfLink: /apis/apps/v1/namespaces/knative-serving/deployments/domainmapping-webhook
+  uid: 1770dfd2-9649-4754-835a-3137c967c447
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: domainmapping-webhook
+      role: domainmapping-webhook
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      creationTimestamp: null
+      labels:
+        app: domainmapping-webhook
+        app.kubernetes.io/component: domain-mapping
+        app.kubernetes.io/name: knative-serving
+        app.kubernetes.io/version: 1.1.0
+        role: domainmapping-webhook
+        serving.knative.dev/release: v1.1.0
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: domainmapping-webhook
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: CONFIG_LOGGING_NAME
+          value: config-logging
+        - name: CONFIG_OBSERVABILITY_NAME
+          value: config-observability
+        - name: WEBHOOK_PORT
+          value: "8443"
+        - name: METRICS_DOMAIN
+          value: knative.dev/serving
+        image: docker.io/shixiongqi/domain-mapping-webhook-a127ae3e896f4e4bc1179581011b7824:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 6
+          httpGet:
+            httpHeaders:
+            - name: k-kubelet-probe
+              value: webhook
+            path: /
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 20
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: domainmapping-webhook
+        ports:
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        - containerPort: 8008
+          name: profiling
+          protocol: TCP
+        - containerPort: 8443
+          name: https-webhook
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            httpHeaders:
+            - name: k-kubelet-probe
+              value: webhook
+            path: /
+            port: 8443
+            scheme: HTTPS
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: controller
+      serviceAccountName: controller
+      terminationGracePeriodSeconds: 300
+status:
+  conditions:
+  - lastTransitionTime: "2022-01-14T16:11:51Z"
+    lastUpdateTime: "2022-01-14T16:11:51Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2022-01-14T16:21:53Z"
+    lastUpdateTime: "2022-01-14T16:21:53Z"
+    message: ReplicaSet "domainmapping-webhook-5bb798954" has timed out progressing.
+    reason: ProgressDeadlineExceeded
+    status: "False"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1

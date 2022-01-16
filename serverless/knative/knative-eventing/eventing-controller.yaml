@@ -1,0 +1,120 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"eventing-controller","app.kubernetes.io/name":"knative-eventing","app.kubernetes.io/version":"1.1.0","eventing.knative.dev/release":"v1.1.0","knative.dev/high-availability":"true"},"name":"eventing-controller","namespace":"knative-eventing"},"spec":{"selector":{"matchLabels":{"app":"eventing-controller"}},"template":{"metadata":{"labels":{"app":"eventing-controller","app.kubernetes.io/component":"eventing-autoscaler","app.kubernetes.io/name":"knative-eventing","app.kubernetes.io/version":"1.1.0","eventing.knative.dev/release":"v1.1.0"}},"spec":{"affinity":{"podAntiAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"podAffinityTerm":{"labelSelector":{"matchLabels":{"app":"eventing-controller"}},"topologyKey":"kubernetes.io/hostname"},"weight":100}]}},"containers":[{"env":[{"name":"SYSTEM_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"CONFIG_LOGGING_NAME","value":"config-logging"},{"name":"CONFIG_OBSERVABILITY_NAME","value":"config-observability"},{"name":"METRICS_DOMAIN","value":"knative.dev/eventing"},{"name":"APISERVER_RA_IMAGE","value":"gcr.io/knative-releases/knative.dev/eventing/cmd/apiserver_receive_adapter@sha256:afb65789e9c92414ef8885bb71ec1afd7dffe1730729a45fbf918356bd6ed7a1"},{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}}],"image":"gcr.io/knative-releases/knative.dev/eventing/cmd/controller@sha256:14e565af0a741a0e34b139d9661555189972af8d53e837305f711a3f9025e188","name":"eventing-controller","ports":[{"containerPort":9090,"name":"metrics"},{"containerPort":8008,"name":"profiling"}],"resources":{"requests":{"cpu":"100m","memory":"100Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true},"terminationMessagePolicy":"FallbackToLogsOnError"}],"enableServiceLinks":false,"serviceAccountName":"eventing-controller"}}}}
+  creationTimestamp: "2022-01-14T16:25:21Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/component: eventing-controller
+    app.kubernetes.io/name: knative-eventing
+    app.kubernetes.io/version: 1.1.0
+    eventing.knative.dev/release: v1.1.0
+    knative.dev/high-availability: "true"
+  name: eventing-controller
+  namespace: knative-eventing
+  resourceVersion: "4846969"
+  selfLink: /apis/apps/v1/namespaces/knative-eventing/deployments/eventing-controller
+  uid: a2078a50-2421-42e4-8ac6-a4ed6372d832
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: eventing-controller
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: eventing-controller
+        app.kubernetes.io/component: eventing-autoscaler
+        app.kubernetes.io/name: knative-eventing
+        app.kubernetes.io/version: 1.1.0
+        eventing.knative.dev/release: v1.1.0
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: eventing-controller
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - env:
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: CONFIG_LOGGING_NAME
+          value: config-logging
+        - name: CONFIG_OBSERVABILITY_NAME
+          value: config-observability
+        - name: METRICS_DOMAIN
+          value: knative.dev/eventing
+        - name: APISERVER_RA_IMAGE
+          value: gcr.io/knative-releases/knative.dev/eventing/cmd/apiserver_receive_adapter@sha256:afb65789e9c92414ef8885bb71ec1afd7dffe1730729a45fbf918356bd6ed7a1
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: docker.io/zhku/knative-eventing-controller:latest
+        imagePullPolicy: IfNotPresent
+        name: eventing-controller
+        ports:
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        - containerPort: 8008
+          name: profiling
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: FallbackToLogsOnError
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: false
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: eventing-controller
+      serviceAccountName: eventing-controller
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2022-01-14T16:25:22Z"
+    lastUpdateTime: "2022-01-14T16:25:22Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2022-01-14T16:35:22Z"
+    lastUpdateTime: "2022-01-14T16:35:22Z"
+    message: ReplicaSet "eventing-controller-5f7c968bf6" has timed out progressing.
+    reason: ProgressDeadlineExceeded
+    status: "False"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
