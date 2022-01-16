@@ -182,3 +182,8 @@ istioctl kube-inject -f deployment.yaml -o deployment-injected.yaml --injectConf
 kubectl apply -f deployment-injected.yaml
 
 
+https://hub.docker.com/r/calico/cni
+
+https://istio.io/latest/zh/docs/setup/additional-setup/cni/
+
+https://github.com/containernetworking/cni/blob/master/SPEC.md#network-configuration-lists
