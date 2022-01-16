@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"net-istio","app.kubernetes.io/name":"knative-serving","app.kubernetes.io/version":"1.1.0","networking.knative.dev/ingress-provider":"istio","serving.knative.dev/release":"v1.1.0"},"name":"net-istio-webhook","namespace":"knative-serving"},"spec":{"selector":{"matchLabels":{"app":"net-istio-webhook","role":"net-istio-webhook"}},"template":{"metadata":{"annotations":{"cluster-autoscaler.kubernetes.io/safe-to-evict":"false"},"labels":{"app":"net-istio-webhook","app.kubernetes.io/component":"net-istio","app.kubernetes.io/name":"knative-serving","app.kubernetes.io/version":"1.1.0","role":"net-istio-webhook","serving.knative.dev/release":"v1.1.0"}},"spec":{"containers":[{"env":[{"name":"SYSTEM_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"CONFIG_LOGGING_NAME","value":"config-logging"},{"name":"CONFIG_OBSERVABILITY_NAME","value":"config-observability"},{"name":"METRICS_DOMAIN","value":"knative.dev/net-istio"},{"name":"WEBHOOK_NAME","value":"net-istio-webhook"}],"image":"gcr.io/knative-releases/knative.dev/net-istio/cmd/webhook@sha256:42e3ce96e92b1a54e5ff5e401e2e056e2351002d482ba3fd42f0b77de57e235d","name":"webhook","ports":[{"containerPort":9090,"name":"metrics"},{"containerPort":8008,"name":"profiling"},{"containerPort":8443,"name":"https-webhook"}],"resources":{"limits":{"cpu":"200m","memory":"200Mi"},"requests":{"cpu":"20m","memory":"20Mi"}},"securityContext":{"allowPrivilegeEscalation":false}}],"serviceAccountName":"controller"}}}}
+  creationTimestamp: "2022-01-16T12:06:00Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/component: net-istio
+    app.kubernetes.io/name: knative-serving
+    app.kubernetes.io/version: 1.1.0
+    networking.knative.dev/ingress-provider: istio
+    serving.knative.dev/release: v1.1.0
+  name: net-istio-webhook
+  namespace: knative-serving
+  resourceVersion: "132773"
+  uid: 477c3f86-bcd4-4bcf-84a1-25ac21f475ac
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: net-istio-webhook
+      role: net-istio-webhook
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
+      creationTimestamp: null
+      labels:
+        app: net-istio-webhook
+        app.kubernetes.io/component: net-istio
+        app.kubernetes.io/name: knative-serving
+        app.kubernetes.io/version: 1.1.0
+        role: net-istio-webhook
+        serving.knative.dev/release: v1.1.0
+    spec:
+      containers:
+      - env:
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: CONFIG_LOGGING_NAME
+          value: config-logging
+        - name: CONFIG_OBSERVABILITY_NAME
+          value: config-observability
+        - name: METRICS_DOMAIN
+          value: knative.dev/net-istio
+        - name: WEBHOOK_NAME
+          value: net-istio-webhook
+        image: docker.io/xunfeng/knative-net-istio-webhook:v0.25.2
+        imagePullPolicy: IfNotPresent
+        name: webhook
+        ports:
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        - containerPort: 8008
+          name: profiling
+          protocol: TCP
+        - containerPort: 8443
+          name: https-webhook
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 20m
+            memory: 20Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: controller
+      serviceAccountName: controller
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2022-01-16T12:06:01Z"
+    lastUpdateTime: "2022-01-16T12:06:01Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2022-01-16T12:06:01Z"
+    lastUpdateTime: "2022-01-16T12:06:01Z"
+    message: ReplicaSet "net-istio-webhook-5588bc847f" is progressing.
+    reason: ReplicaSetUpdated
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1

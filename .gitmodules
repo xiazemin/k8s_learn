@@ -46,3 +46,12 @@
 [submodule "Istio/release-builder"]
 	path = Istio/release-builder
 	url = https://github.com/istio/release-builder
+[submodule "serverless/knative/serving"]
+	path = serverless/knative/serving
+	url = https://github.com/knative/serving
+[submodule "serverless/knative/eventing"]
+	path = serverless/knative/eventing
+	url = https://github.com/knative/eventing
+[submodule "serverless/knative/docs"]
+	path = serverless/knative/docs
+	url = https://github.com/knative/docs
