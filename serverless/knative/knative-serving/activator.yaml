@@ -68,7 +68,7 @@ spec:
           value: config-observability
         - name: METRICS_DOMAIN
           value: knative.dev/internal/serving
-        image: docker.io/fandy00001/knative-serving-activator:latest
+        image: docker.io/shixiongqi/activator-ecd51ca5034883acbe737fde417a3d86:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 12

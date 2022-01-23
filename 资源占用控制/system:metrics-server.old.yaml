@@ -1,0 +1,28 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"labels":{"k8s-app":"metrics-server"},"name":"system:metrics-server"},"rules":[{"apiGroups":[""],"resources":["nodes/metrics"],"verbs":["get"]},{"apiGroups":[""],"resources":["pods","nodes"],"verbs":["get","list","watch"]}]}
+  creationTimestamp: "2022-01-23T03:45:28Z"
+  labels:
+    k8s-app: metrics-server
+  name: system:metrics-server
+  resourceVersion: "956041"
+  uid: 27f8f32b-d4c1-4752-bfe0-0c3aa2789f2c
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes/metrics
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch

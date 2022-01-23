@@ -55,7 +55,7 @@ spec:
           value: config-observability
         - name: METRICS_DOMAIN
           value: knative.dev/net-istio
-        image: docker.io/xunfeng/net-istio-controller:v0.17.3
+        image: docker.io/jzy99/net-istio-controller:v1.0.0
         imagePullPolicy: IfNotPresent
         name: controller
         ports:

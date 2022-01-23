@@ -58,7 +58,7 @@ spec:
           value: knative.dev/net-istio
         - name: WEBHOOK_NAME
           value: net-istio-webhook
-        image: docker.io/xunfeng/knative-net-istio-webhook:v0.25.2
+        image: docker.io/jzy99/net-istio-webhook:v1.0.0
         imagePullPolicy: IfNotPresent
         name: webhook
         ports:

@@ -73,7 +73,7 @@ spec:
           value: config-observability
         - name: METRICS_DOMAIN
           value: knative.dev/serving
-        image: docker.io/fandy00001/knative-serving-autoscaler:latest
+        image: docker.io/shixiongqi/autoscaler-12c0fa24db31956a7cfa673210e4fa13:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 6
