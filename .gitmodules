@@ -55,3 +55,6 @@
 [submodule "serverless/knative/docs"]
 	path = serverless/knative/docs
 	url = https://github.com/knative/docs
+[submodule "webhook/kube-sidecar-injector"]
+	path = webhook/kube-sidecar-injector
+	url = https://github.com/morvencao/kube-sidecar-injector
