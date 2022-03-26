@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: web-svc-vs-header
+spec:
+  hosts:
+    - web-svc
+  http:
+  - match:
+    - headers:
+        end-user:
+          exact: xiazemin
+    route:
+      - destination:
+          host: httpd-svc
+  - route:
+      - destination:
+          host: tomcat-svc

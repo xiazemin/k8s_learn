@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inject
+  labels:
+    app: inject
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inject
+  template:
+    metadata:
+      labels:
+        app: inject
+    spec:
+      containers:
+        - name: nginx
+          image: docker.io/library/nginx:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
