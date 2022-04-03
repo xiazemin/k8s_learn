@@ -3549,9 +3549,7 @@ metadata:
 spec:
   # This is the Go import path for the binary that is containerized
   # and substituted here.
-  image: gcr.io/knative-releases/knative.dev/serving/cmd/queue:latest
-  imagePullPolicy: IfNotPresent 
-#c9dcb1610c99fab4caa39b972f6ce4defa2bdc4ab5c502cc1759f6aa89c34e02
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:c9dcb1610c99fab4caa39b972f6ce4defa2bdc4ab5c502cc1759f6aa89c34e02
 
 ---
 # Copyright 2018 The Knative Authors
@@ -3940,9 +3938,7 @@ data:
   # This is the Go import path for the binary that is containerized
   # and substituted here.
   # TODO: switch to 'queue-sidecar-image' after 0.27
-  queueSidecarImage: gcr.io/knative-releases/knative.dev/serving/cmd/queue:latest
-  imagePullPolicy: IfNotPresent  
-#c9dcb1610c99fab4caa39b972f6ce4defa2bdc4ab5c502cc1759f6aa89c34e02
+  queueSidecarImage: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:c9dcb1610c99fab4caa39b972f6ce4defa2bdc4ab5c502cc1759f6aa89c34e02
   _example: |-
     ################################
     #                              #
@@ -4958,9 +4954,7 @@ spec:
         - name: activator
           # This is the Go import path for the binary that is containerized
           # and substituted here.
-          image: gcr.io/knative-releases/knative.dev/serving/cmd/activator:latest
-          imagePullPolicy: IfNotPresent 
-          #624ad8df549de9192e7b0d2f596c08c5996f678b25ff94688464412890126bb1
+          image: gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:624ad8df549de9192e7b0d2f596c08c5996f678b25ff94688464412890126bb1
           # The numbers are based on performance test results from
           # https://github.com/knative/serving/issues/1625#issuecomment-511930023
           resources:
@@ -5125,9 +5119,7 @@ spec:
         - name: autoscaler
           # This is the Go import path for the binary that is containerized
           # and substituted here.
-          image: gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler:latest 
-          imagePullPolicy: IfNotPresent 
-#6b77fce9159173ce700cbe8202eb0ab33b2128688baadf34e916b7341889bde0
+          image: gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:6b77fce9159173ce700cbe8202eb0ab33b2128688baadf34e916b7341889bde0
           resources:
             requests:
               cpu: 100m
@@ -5264,9 +5256,7 @@ spec:
         - name: controller
           # This is the Go import path for the binary that is containerized
           # and substituted here.
-          image: gcr.io/knative-releases/knative.dev/serving/cmd/controller:latest 
-          imagePullPolicy: IfNotPresent
-#712ac88a1ec328ad366a0245882061de01bdf631cb21bac2b621af8e20e7082d
+          image: gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:712ac88a1ec328ad366a0245882061de01bdf631cb21bac2b621af8e20e7082d
           resources:
             requests:
               cpu: 100m
@@ -5381,9 +5371,7 @@ spec:
         - name: domain-mapping
           # This is the Go import path for the binary that is containerized
           # and substituted here.
-          image: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping:latest
-          imagePullPolicy: IfNotPresent
-#5f9d8293f8d8d04cbfeed796ea15cf6dd967d2213f326debfe76983ab58b63fd
+          image: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping@sha256:5f9d8293f8d8d04cbfeed796ea15cf6dd967d2213f326debfe76983ab58b63fd
           resources:
             requests:
               cpu: 30m
@@ -5473,9 +5461,7 @@ spec:
         - name: domainmapping-webhook
           # This is the Go import path for the binary that is containerized
           # and substituted here.
-          image: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook:latest
-          imagePullPolicy: IfNotPresent
-#51800b3435af2cd551f7de5119133de3cb30e3d72ec9df18d5e2e14ec482668f
+          image: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook@sha256:51800b3435af2cd551f7de5119133de3cb30e3d72ec9df18d5e2e14ec482668f
           resources:
             requests:
               cpu: 100m
@@ -5678,9 +5664,7 @@ spec:
         - name: webhook
           # This is the Go import path for the binary that is containerized
           # and substituted here.
-          image: gcr.io/knative-releases/knative.dev/serving/cmd/webhook:latest
-          imagePullPolicy: IfNotPresent 
-#881a707c3f5b8537adf1fd460405fb8e65ae2676e4591926f9cdfb4454efd350
+          image: gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:881a707c3f5b8537adf1fd460405fb8e65ae2676e4591926f9cdfb4454efd350
           resources:
             requests:
               cpu: 100m
