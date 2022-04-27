@@ -35,8 +35,10 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("oneConsumerCopy called")
-		go consumer.NewConsumerCopy(config.TopicTest).Listen()
-		go consumer.NewConsumerCopy(config.TopicTest1).Listen()
+		go consumer.NewConsumerCopy(config.TopicTest, config.Earliest).Listen()
+		go consumer.NewConsumerCopy(config.TopicTest1, config.Latest).Listen()
+		go consumer.NewConsumerCopy(config.TopicTest2, config.Earliest).Listen()
+		go consumer.NewConsumerCopy(config.TopicTest3, config.Latest).Listen()
 		select {}
 	},
 }
@@ -54,3 +56,8 @@ func init() {
 	// is called directly, e.g.:
 	// oneConsumerCopyCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+
+/*
+./bin/kafka-topics.sh --broker-list 127.0.0.1:909 create test2
+./bin/kafka-topics.sh --broker-list 127.0.0.1:909 create test3
+*/

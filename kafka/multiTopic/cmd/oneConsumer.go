@@ -57,3 +57,15 @@ func init() {
 	// is called directly, e.g.:
 	// oneConsumerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+
+/*
+cd software/apache-zookeeper-3.6.2-bin
+./bin/zkServer.sh
+
+ cd software/kafka_2.12-2.7.0
+ ./bin/kafka-server-start.sh config/server.properties
+
+ ./bin/kafka-console-producer.sh --topic test --broker-list 127.0.0.1:9092
+ ./bin/kafka-console-producer.sh --topic test1 --broker-list 127.0.0.1:9092
+
+*/

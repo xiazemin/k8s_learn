@@ -15,15 +15,19 @@ type consumerCopy struct {
 	*kafka.Consumer
 }
 
-func NewConsumerCopy(topic string) ConsumerCopy {
+func NewConsumerCopy(topic, offset string) ConsumerCopy {
 	return &consumerCopy{
 		Topic:    topic,
-		Consumer: NewKafkaConsumer(),
+		Consumer: NewKafkaConsumer(offset),
 	}
 }
 
 func (m *consumerCopy) Listen() {
-	if err := m.Consumer.Subscribe(m.Topic, nil); err != nil {
+	// if err := m.Consumer.Subscribe(m.Topic, nil); err != nil {
+	// 	panic(err)
+	// }
+
+	if err := m.Consumer.SubscribeTopics([]string{m.Topic}, nil); err != nil {
 		panic(err)
 	}
 	for true {
