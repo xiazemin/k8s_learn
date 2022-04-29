@@ -1,0 +1,3 @@
+Kubernetes的Ingress资源基于HTTP报文头和路径定义路由策略。在大多数情况下这已足够，但有时希望在Ingress级别对路由进行更多控制，通用的Ingress资源无法满足需求，所以Kong提供KongIngress CRD对Ingress资源进行了扩展，以提供对代理行为更细粒度控制，KongIngress与Ingress资源协同工作并对其进行扩展。它并不是在Kubernetes中替代Ingress资源。使用KongIngress可以修改Kong中与Ingress资源相关的Upstream，Service和Route实体的所有属性。
+
+https://blog.csdn.net/twingao/article/details/104073374

@@ -96,6 +96,15 @@ https://blog.csdn.net/twingao/article/details/104073159
 https://blog.csdn.net/twingao/article/details/104073112
 https://blog.csdn.net/twingao/article/details/104073090
 https://blog.csdn.net/twingao/article/details/104073068
+https://blog.csdn.net/twingao/article/details/104073289
+https://blog.csdn.net/twingao/article/details/104073337
+https://blog.csdn.net/twingao/article/details/104073374
+https://blog.csdn.net/twingao/article/details/104073410
+https://blog.csdn.net/twingao/article/details/104073425
+https://blog.csdn.net/twingao/article/details/104073442
+https://blog.csdn.net/twingao/article/details/104073451
+https://www.jianshu.com/p/ca70c26a853d
+https://www.jianshu.com/p/27dda1e4b4ce
 
 Kong的由来
 Nginx是模块化设计的反向代理软件，C语言开发。
