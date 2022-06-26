@@ -1,0 +1,54 @@
+% go run main.go 
+
+%7|1656228133.240|INIT|xiazemindeMBP#consumer-1| [thrd:app]: librdkafka v1.8.2 (0x10802ff) xiazemindeMBP#consumer-1 initialized (builtin.features gzip,snappy,ssl,sasl,regex,lz4,sasl_gssapi,sasl_plain,sasl_scram,plugins,zstd,sasl_oauthbearer, CC CXX PKGCONFIG OSXLD LIBDL PLUGINS ZLIB SSL SASL_CYRUS ZSTD HDRHISTOGRAM LZ4_EXT SYSLOG SNAPPY SOCKEM SASL_SCRAM SASL_OAUTHBEARER, debug 0x40)
+<nil>
+
+
+
+
+[test[0]@4] <nil>
+[test[0]@4] <nil>
+%7|1656228137.861|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 294, error "Success", MaxOffset 9, LSO 9, Ver 3/3
+%7|1656228137.861|MSG|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: Skip offset 3 < fetch_offset 4
+%7|1656228137.861|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 5 message(s) (5 bytes, 5 ops) on test [0] fetch queue (qlen 0, v3, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@4] <nil> 4
+ test[0]@4 
+offsets&: test[0]@4
+[test[0]@4] <nil> 4
+ test[0]@5 
+offsets&: test[0]@5
+[test[0]@4] <nil> 4
+ test[0]@6 
+offsets&: test[0]@6
+[test[0]@4] <nil> 4
+ test[0]@7 
+offsets&: test[0]@7
+[test[0]@4] <nil> 4
+ test[0]@8 
+offsets&: test[0]@8
+[test[0]@stored] <nil> -1000
+ <nil> 
+%7|1656228138.388|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v3 < 9 or old rktp)
+%7|1656228152.508|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Success", MaxOffset 9, LSO 9, Ver 9/9
+Local: Outdated
+[test[0]@4] <nil>
+[test[0]@4] <nil>
+ <nil> 
+[test[0]@stored] <nil> -1000
+ <nil> 
+%7|1656228153.017|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v9 < 24 or old rktp)
+%7|1656228153.020|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 216, error "Success", MaxOffset 9, LSO 9, Ver 24/24
+%7|1656228153.020|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 4 message(s) (4 bytes, 4 ops) on test [0] fetch queue (qlen 0, v24, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@stored] <nil> -1000
+ test[0]@5 
+offsets&: test[0]@5
+[test[0]@stored] <nil> -1000
+ test[0]@6 
+offsets&: test[0]@6
+[test[0]@stored] <nil> -1000
+ test[0]@7 
+offsets&: test[0]@7
+[test[0]@stored] <nil> -1000
+ test[0]@8 
+offsets&: test[0]@8
+%7|1656228153.524|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Success", MaxOffset 9, LSO 9, Ver 24/24

@@ -1,0 +1,148 @@
+% go run main.go 
+%7|1656227446.880|INIT|xiazemindeMBP#consumer-1| [thrd:app]: librdkafka v1.8.2 (0x10802ff) xiazemindeMBP#consumer-1 initialized (builtin.features gzip,snappy,ssl,sasl,regex,lz4,sasl_gssapi,sasl_plain,sasl_scram,plugins,zstd,sasl_oauthbearer, CC CXX PKGCONFIG OSXLD LIBDL PLUGINS ZLIB SSL SASL_CYRUS ZSTD HDRHISTOGRAM LZ4_EXT SYSLOG SNAPPY SOCKEM SASL_SCRAM SASL_OAUTHBEARER, debug 0x40)
+<nil>
+
+
+
+[test[0]@4] <nil>
+[test[0]@4] <nil>
+%7|1656227450.943|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 294, error "Success", MaxOffset 9, LSO 9, Ver 3/3
+%7|1656227450.943|MSG|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: Skip offset 3 < fetch_offset 4
+%7|1656227450.943|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 5 message(s) (5 bytes, 5 ops) on test [0] fetch queue (qlen 0, v3, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@4] <nil> 4
+ test[0]@4 
+offsets&: test[0]@4
+[test[0]@4] <nil> 4
+ test[0]@5 
+offsets&: test[0]@5
+[test[0]@4] <nil> 4
+ test[0]@6 
+offsets&: test[0]@6
+[test[0]@4] <nil> 4
+ test[0]@7 
+offsets&: test[0]@7
+[test[0]@4] <nil> 4
+ test[0]@8 
+offsets&: test[0]@8
+[test[0]@4] <nil> 4
+ <nil> 
+%7|1656227451.452|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Success", MaxOffset 9, LSO 9, Ver 3/3
+[test[0]@0] <nil>
+[test[0]@4] <nil>
+---------
+[test[0]@4] <nil>
+EOF at test[0]@9(Broker: No more messages)
+[test[0]@5] <nil>
+<nil>
+%7|1656227451.961|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v3 < 7 or old rktp)
+%7|1656227451.963|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 216, error "Success", MaxOffset 9, LSO 9, Ver 7/7
+%7|1656227451.963|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 4 message(s) (4 bytes, 4 ops) on test [0] fetch queue (qlen 0, v7, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@5] <nil>
+test[0]@5
+[test[0]@6] <nil>
+<nil>
+%7|1656227452.466|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v7 < 15 or old rktp)
+%7|1656227452.470|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 147, error "Success", MaxOffset 9, LSO 9, Ver 15/15
+%7|1656227452.470|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 3 message(s) (3 bytes, 3 ops) on test [0] fetch queue (qlen 0, v15, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@6] <nil>
+test[0]@6
+[test[0]@7] <nil>
+<nil>
+0 9 <nil>
+%7|1656227452.977|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v15 < 23 or old rktp)
+%7|1656227452.979|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 147, error "Success", MaxOffset 9, LSO 9, Ver 23/23
+%7|1656227452.979|MSG|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: Skip offset 6 < fetch_offset 7
+%7|1656227452.979|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 2 message(s) (2 bytes, 2 ops) on test [0] fetch queue (qlen 4, v23, last_offset 8, 0 ctrl msgs, uncompressed)
+%7|1656227474.110|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Success", MaxOffset 9, LSO 9, Ver 23/23
+[test[0]@7] <nil>
+[test[0]@7] <nil>
+[test[0]@7] <nil> 7
+ <nil> 
+%7|1656227474.612|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v23 < 32 or old rktp)
+%7|1656227474.615|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 147, error "Success", MaxOffset 9, LSO 9, Ver 32/32
+%7|1656227474.615|MSG|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: Skip offset 6 < fetch_offset 7
+%7|1656227474.615|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 2 message(s) (2 bytes, 2 ops) on test [0] fetch queue (qlen 0, v32, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@7] <nil> 7
+ test[0]@7 
+offsets&: test[0]@7
+[test[0]@7] <nil> 7
+ test[0]@8 
+offsets&: test[0]@8
+[test[0]@7] <nil> 7
+ <nil> 
+%7|1656227475.119|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Success", MaxOffset 9, LSO 9, Ver 32/32
+[test[0]@7] <nil> 7
+ EOF at test[0]@9(Broker: No more messages) 
+[test[0]@7] <nil> 7
+ <nil> 
+%7|1656227475.623|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Success", MaxOffset 9, LSO 9, Ver 32/32
+[test[0]@0] <nil>
+[test[0]@7] <nil>
+---------
+[test[0]@8] <nil>
+<nil>
+%7|1656227476.132|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v32 < 36 or old rktp)
+%7|1656227476.133|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 69, error "Success", MaxOffset 9, LSO 9, Ver 36/36
+%7|1656227476.133|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 1 message(s) (1 bytes, 1 ops) on test [0] fetch queue (qlen 0, v36, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@8] <nil>
+test[0]@8
+[test[0]@9] <nil>
+<nil>
+%7|1656227476.637|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v36 < 44 or old rktp)
+[test[0]@10] <nil>
+<nil>
+%7|1656227477.140|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v44 < 48 or old rktp)
+%7|1656227477.143|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Broker: Offset out of range", MaxOffset -1, LSO -1, Ver 48/48
+%4|1656227477.143|OFFSET|xiazemindeMBP#consumer-1| [thrd:main]: test [0]: offset reset (at offset 10) to BEGINNING: fetch failed due to requested offset not available on the broker: Broker: Offset out of range
+[test[0]@11] <nil>
+<nil>
+%7|1656227477.646|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Broker: Offset out of range", MaxOffset -1, LSO -1, Ver 52/52
+%4|1656227477.646|OFFSET|xiazemindeMBP#consumer-1| [thrd:main]: test [0]: offset reset (at offset 11) to BEGINNING: fetch failed due to requested offset not available on the broker: Broker: Offset out of range
+[test[0]@12] <nil>
+<nil>
+-1 -1 <nil>
+%7|1656227478.251|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 441, error "Success", MaxOffset 9, LSO 9, Ver 56/56
+%7|1656227478.251|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 9 message(s) (9 bytes, 9 ops) on test [0] fetch queue (qlen 4, v56, last_offset 8, 0 ctrl msgs, uncompressed)
+%7|1656227489.327|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v56 < 57 or old rktp)
+[test[0]@12] <nil>
+[test[0]@12] <nil>
+[test[0]@stored] <nil> -1000
+ <nil> 
+ <nil> 
+[test[0]@stored] <nil> -1000
+ <nil> 
+[test[0]@stored] <nil> -1000
+ <nil> 
+[test[0]@stored] <nil> -1000
+ <nil> 
+%7|1656227524.806|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 216, error "Success", MaxOffset 9, LSO 9, Ver 74/74
+%7|1656227524.806|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 4 message(s) (4 bytes, 4 ops) on test [0] fetch queue (qlen 0, v74, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@stored] <nil> -1000
+ test[0]@5 
+offsets&: test[0]@5
+[] Local: Timed out
+[test[0]@stored] <nil>
+---------
+[test[0]@stored] <nil>
+test[0]@6
+%7|1656227525.313|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v74 < 78 or old rktp)
+%7|1656227525.323|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 147, error "Success", MaxOffset 9, LSO 9, Ver 78/78
+%7|1656227525.323|CONSUME|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Enqueue 3 message(s) (3 bytes, 3 ops) on test [0] fetch queue (qlen 0, v78, last_offset 8, 0 ctrl msgs, uncompressed)
+[test[0]@6] <nil>
+test[0]@6
+[test[0]@13] <nil>
+<nil>
+%7|1656227525.829|DROP|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: test [0]: dropping outdated fetch response (v78 < 86 or old rktp)
+%7|1656227525.831|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Broker: Offset out of range", MaxOffset -1, LSO -1, Ver 86/86
+%4|1656227525.832|OFFSET|xiazemindeMBP#consumer-1| [thrd:main]: test [0]: offset reset (at offset 13) to BEGINNING: fetch failed due to requested offset not available on the broker: Broker: Offset out of range
+[test[0]@14] <nil>
+<nil>
+%7|1656227526.338|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Broker: Offset out of range", MaxOffset -1, LSO -1, Ver 90/90
+%4|1656227526.338|OFFSET|xiazemindeMBP#consumer-1| [thrd:main]: test [0]: offset reset (at offset 14) to BEGINNING: fetch failed due to requested offset not available on the broker: Broker: Offset out of range
+[test[0]@15] <nil>
+<nil>
+%7|1656227526.839|FETCH|xiazemindeMBP#consumer-1| [thrd:192.168.31.231:9092/0]: 192.168.31.231:9092/0: Topic test [0] MessageSet size 0, error "Broker: Offset out of range", MaxOffset -1, LSO -1, Ver 94/94
+%4|1656227526.840|OFFSET|xiazemindeMBP#consumer-1| [thrd:main]: test [0]: offset reset (at offset 15) to BEGINNING: fetch failed due to requested offset not available on the broker: Broker: Offset out of range
+[test[0]@16] <nil>
+<nil>
+-1 -1 <nil>
